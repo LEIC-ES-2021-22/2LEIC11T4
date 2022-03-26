@@ -3,7 +3,6 @@
 
 <p align="center" justify="center">
   <img src="images/Use_case_diagram.png"/>
-</p>
 
 Being logged in is a precondition to all the cases bellow.
 
@@ -60,6 +59,8 @@ Being logged in is a precondition to all the cases bellow.
 | *Normal flow* | The student opens a city's page inside the app. Then a list with the most significant places in that city are shown with an image and some key information (like location) |
 | *Alternative flows and exceptions* | N/A |
 
+<br><br>
+
 
 #### Make Erasmus experience reviews
 
@@ -72,6 +73,9 @@ Being logged in is a precondition to all the cases bellow.
 | *Postconditions* | The review data must be stored in a database and be available to another student |
 | *Normal flow* | 1. selects a university <br> 2. rates and makes a comment <br> 3. the send button is pressed <br> 4. the review is available to other students |
 | *Alternative flows and exceptions* | If the data cannot be stored due to lack of internet, then a error message must be shown |
+
+<br><br>
+
 
 #### Show Experience Reviews
 
