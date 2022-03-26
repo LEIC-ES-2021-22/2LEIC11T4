@@ -2,7 +2,8 @@
 ### Use case model 
 
 <p align="center" justify="center">
-  <img src="images/Use_case_diagram.png"/>
+  <img src="../images/Use_case_diagram.png"/>
+</p>
 
 Being logged in is a precondition to all the cases bellow.
 
