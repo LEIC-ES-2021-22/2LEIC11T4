@@ -7,10 +7,10 @@ You can find here detailed about the product, from a high-level vision to low-le
 * Business modeling 
   * [Product Vision](docs/ProductVision.md)
   * [Elevator Pitch](docs/ElevatorPitch.md)
-* [Requirements](requirements.md)
+* [Requirements](docs/requirements.md)
   * [Use Case Model](docs/requirements.md)
   * [Domain model](docs/requirements.md)
-  * [User stories](docs/requirements.md)
+  * [UI Mockup](docs/requirements.md)
 * [Architecture and Design]
   * [Logical architecture]
   * [Physical architecture]

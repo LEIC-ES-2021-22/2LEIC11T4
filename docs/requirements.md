@@ -124,3 +124,8 @@ Example:
  <p align="center" justify="center">
   <img src="https://github.com/LEIC-ES-2021-22/templates/blob/main/images/DomainModel.png"/>
 </p>
+
+
+### UI Mockup
+
+Link to Figma full UI Mockup: <a>https://www.figma.com/proto/AQJF6zoCXgRvlYiLwTVjfT/Erasmus-Unite?node-id=0%3A1</a>
