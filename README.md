@@ -4,6 +4,7 @@ Welcome to the documentation pages of the Erasmus Unite!
 
 You can find here detailed about the product, from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by discipline (as of RUP): 
 
+
 * Business modeling
   * [Product Vision](docs/ProductVision.md#product-vision)
   * [Elevator Pitch](docs/ElevatorPitch.md#elevator-pitch)
