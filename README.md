@@ -8,11 +8,11 @@ You can find here detailed about the product, from a high-level vision to low-le
 * Business modeling
   * [Product Vision](docs/ProductVision.md#product-vision)
   * [Elevator Pitch](docs/ElevatorPitch.md#elevator-pitch)
-* [Requirements] 
+* Requirements
   * [Use Case Model](docs/requirements.md#use-case-model)
   * [Domain model](docs/requirements.md#domain-model)
   * [UI Mockup](docs/requirements.md#ui-mockup)
-* [Architecture and Design]
+* Architecture and Design
   * [Logical architecture](docs/ArchitectureAndDesign.md#logical-architecture)
   * [Physical architecture](docs/ArchitectureAndDesign.md#physical-architecture)
   * [Prototype]
@@ -33,7 +33,4 @@ Thank you!
 
 # Team 
 * [Team](docs/team.md)
-
-
----
 
