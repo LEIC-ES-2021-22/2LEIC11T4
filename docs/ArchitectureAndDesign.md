@@ -18,13 +18,10 @@ Regarding the physical architecture of our project, it relies on three separate 
 ![DeploymentView](../images/deployment_uml.png)
 
 
-
 ### Vertical prototype
 
 Credits app screen as a prototype of our Flutter development
 
 <img src="../images/drawer.png" alt="drawing" width="49%"/> <img src="../images/credits.png" alt="drawing" width="49%"/>
-
-
 
 
