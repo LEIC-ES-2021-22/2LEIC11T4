@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:sentry/sentry.dart';
 import 'package:redux/redux.dart';
 import 'package:uni/controller/middleware.dart';
 import 'package:uni/model/app_state.dart';
@@ -32,23 +30,13 @@ final Store<AppState> state = Store<AppState>(appReducers,
     initialState: AppState(null),
     middleware: [generalMiddleware]);
 
-SentryEvent beforeSend(SentryEvent event) {
-  return event.level == SentryLevel.info ? event : null;
-}
-
-Future<void> main() async {
+void main() {
   OnStartUp.onStart(state);
-  await SentryFlutter.init(
-    (options) {
-      options.dsn =
-          'https://a2661645df1c4992b24161010c5e0ecb@o553498.ingest.sentry.io/5680848';
-    },
-    appRunner: () => {runApp(MyApp())},
-  );
+  runApp(MyApp());
 }
 
 /// Manages the state of the app
-///
+/// 
 /// This class is necessary to track the app's state for
 /// the current execution
 class MyApp extends StatefulWidget {
@@ -95,6 +83,9 @@ class MyAppState extends State<MyApp> {
               case '/' + Constants.navStops:
                 return PageTransition.makePageTransition(
                     page: BusStopNextArrivalsPage(), settings: settings);
+              case '/' + Constants.navErasmus:
+                return PageTransition.makePageTransition(
+                    page: ErasmusPageView(), settings: settings);
               case '/' + Constants.navAbout:
                 return PageTransition.makePageTransition(
                     page: AboutPageView(), settings: settings);
@@ -103,9 +94,6 @@ class MyAppState extends State<MyApp> {
                     page: BugReportPageView(),
                     settings: settings,
                     maintainState: false);
-              case '/' + Constants.navErasmus:
-                return PageTransition.makePageTransition(
-                    page: ErasmusPageView(), settings: settings);
               case '/' + Constants.navLogOut:
                 return LogoutRoute.buildLogoutRoute();
             }

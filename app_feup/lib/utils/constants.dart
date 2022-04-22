@@ -5,6 +5,7 @@ const navSchedule = 'Horário';
 const navExams = 'Mapa de Exames';
 const navStops = 'Autocarros';
 const navAbout = 'Sobre';
+const navErasmus = 'Erasmus Unite';
 const navBugReport = 'Bugs e Sugestões';
 const navLogOut = 'Terminar sessão';
 
