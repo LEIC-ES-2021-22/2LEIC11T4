@@ -45,7 +45,9 @@ class ErasmusMainPageViewState extends GeneralPageViewState {
                 'Universities',
                 'Find info about Erasmus Universities',
                 Constants.navErasmusUniversitiesList),
-            ErasmusNavigationCard('Paperwork', 'Find all you need to enroll in Erasmus',
+            ErasmusNavigationCard(
+                'Paperwork',
+                'Find all you need to enroll in Erasmus',
                 Constants.navErasmusPaperwork),
             TextButton(
                 onPressed: () {
