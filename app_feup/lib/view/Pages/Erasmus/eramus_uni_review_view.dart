@@ -17,7 +17,7 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
         Container(
             child: SvgPicture.asset(
           'assets/images/ni_logo.svg',
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           width: queryData.size.height / 7,
           height: queryData.size.height / 7,
         )),
@@ -30,7 +30,7 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
               bottom: queryData.size.width / 12),
           child: Column(children: <Widget>[
             Text(
-              'University Review \n\n',
+              'University Make Review \n\n',
               textScaleFactor: 1.5,
             ),
             Text('TODO')
