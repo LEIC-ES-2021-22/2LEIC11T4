@@ -53,8 +53,11 @@ Dolorum perferendis nesciunt rerum recusandae quia dolorem laudantium. Necessita
                   'Portugal\n',
                   textScaleFactor: 1,
                 ),
-                TextLink('Ranking: ', ' 317 th', '',
-                    'https://cwur.org/2021-22.php', false, Colors.black),
+                TextLink(
+                  '317 th',
+                  'https://cwur.org/2021-22.php',
+                  preText: 'Ranking: ',
+                ),
               ]),
             ))
           ],
@@ -62,8 +65,12 @@ Dolorum perferendis nesciunt rerum recusandae quia dolorem laudantium. Necessita
         Center(
             child: Column(
           children: [
-            TextLink('Website:  ', 'https://fe.up.pt', '\n', 'https://fe.up.pt',
-                true, Colors.black),
+            TextLink(
+              'fe.up.pt',
+              'https://fe.up.pt',
+              preText: 'Website:  ',
+              postText: '\n',
+            ),
             Text(
               'Description',
               textScaleFactor: 1.2,
@@ -116,23 +123,19 @@ Dolorum perferendis nesciunt rerum recusandae quia dolorem laudantium. Necessita
 // Class Widgets
 
 class TextLink extends StatelessWidget {
-  final String preText;
   final String linkText;
-  final String postText;
-
   final String link;
-  final bool useUnderline;
-  final Color textColor;
 
-  const TextLink(
-      String this.preText,
-      String this.linkText,
-      String this.postText,
-      String this.link,
-      bool this.useUnderline,
-      Color this.textColor,
-      {Key key})
-      : super(key: key);
+  String postText = '';
+  String preText = '';
+
+  TextLink(
+    String this.linkText,
+    String this.link, {
+    Key key,
+    String this.preText,
+    String this.postText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -140,18 +143,18 @@ class TextLink extends StatelessWidget {
       text: TextSpan(children: [
         TextSpan(
           text: preText,
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: Colors.black),
         ),
         TextSpan(
             text: linkText,
             style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
-                decoration: useUnderline ? TextDecoration.underline : null),
+                decoration: TextDecoration.underline),
             recognizer: TapGestureRecognizer()..onTap = () => launch(link)),
         TextSpan(
           text: postText,
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: Colors.black),
         ),
       ]),
     );
