@@ -122,6 +122,7 @@ class ErasmusUniversityPageViewState extends GeneralPageViewState {
 
 // Class Widgets
 
+// ignore: must_be_immutable
 class TextLink extends StatelessWidget {
   final String linkText;
   final String link;
