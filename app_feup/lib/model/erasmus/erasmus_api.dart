@@ -5,6 +5,8 @@ class UniversityItem {
   String rank;
   String country;
   String course;
+  String imgUrl = 'https://picsum.photos/seed/picsum/200/300';
+
 
   dynamic value;
 
@@ -14,7 +16,8 @@ class UniversityItem {
     this.rank,
     this.value,
     this.country,
-    this.course
+    this.course,
+    this.imgUrl
   });
 
   factory UniversityItem.fromJson(Map<String, dynamic> json) {
@@ -24,41 +27,46 @@ class UniversityItem {
         rank: json['rank'],
         value: json['value'],
         country: json['country'],
-        course: json['course']
+        course: json['course'],
+        imgUrl: json['imgUrl']
     );
   }
 }
 
 class ErasmusAPI {
 
+  static List<UniversityItem> fetchUniversities() {
+    return [UniversityItem(label : 'Feup',
+        name: 'Faculdade de engenharia da universidade do Porto',
+        rank: '124th',value : 30, country: 'Portugal',
+        course: 'Engenharia de Software', imgUrl: 'https://picsum.photos/200'),
+      UniversityItem(label : 'Harvard',
+          name: 'Harvard University',
+          rank: '124th',value : 31, country: 'U.S.A',
+          course: 'Direito', imgUrl: 'https://picsum.photos/200'),
+      UniversityItem(label : 'MIT',
+          name: 'Massachusetts Institute of Technology',
+          rank: '124th', value : 32, country: 'U.S.A',
+          course: 'Ciência de computadores', imgUrl: 'https://picsum.photos/200'),
+      UniversityItem(label : 'FEP',
+          name: 'Faculdade de economia do Porto',
+          rank: '124th',value : 33, country: 'Portugal',
+          course: 'Economia', imgUrl: 'https://picsum.photos/200'),
+      UniversityItem(label : 'Flup',
+          name: 'Faculdade de letras da universidade do Porto',
+          rank: '124th', value : 34, country: 'Portugal',
+          course: 'História', imgUrl: 'https://picsum.photos/200'),
+      UniversityItem(label : 'Uminho',
+          name: 'Universidade do Minho',
+          rank: '254th', value : 35, country: 'Portugal',
+          course: 'Engenharia de Software', imgUrl: 'https://picsum.photos/200')
+    ];
+  }
+
   static List<UniversityItem> getUniversitiesFromSearch(String search,
       String country, String course) {
 
-      var list = [UniversityItem(label : 'Feup',
-          name: 'Faculdade de engenharia da universidade do Porto',
-          rank: '124th',value : 30, country: 'Portugal',
-          course: 'Engenharia de Software'),
-        UniversityItem(label : 'Harvard',
-            name: 'Harvard University',
-            rank: '124th',value : 31, country: 'U.S.A',
-            course: 'Direito'),
-        UniversityItem(label : 'MIT',
-            name: 'Massachusetts Institute of Technology',
-            rank: '124th', value : 32, country: 'U.S.A',
-            course: 'Ciência de computadores'),
-        UniversityItem(label : 'FEP',
-            name: 'Faculdade de economia do Porto',
-            rank: '124th',value : 33, country: 'Portugal',
-            course: 'Economia'),
-        UniversityItem(label : 'Flup',
-            name: 'Faculdade de letras da universidade do Porto',
-            rank: '124th', value : 34, country: 'Portugal',
-            course: 'História'),
-        UniversityItem(label : 'Uminho',
-            name: 'Universidade do Minho',
-            rank: '254th', value : 35, country: 'Portugal',
-            course: 'Engenharia de Software')
-      ];
+      var list = fetchUniversities();
 
       if (search.isEmpty && country == 'All' && course == 'All') {
         return list;
@@ -70,6 +78,24 @@ class ErasmusAPI {
       });
 
       return list;
+  }
+
+  static List<String> getAvailableCountries() {
+    final set = fetchUniversities().map((e) => e.country).toSet();
+    set.add('All');
+    return set.toList();
+  }
+
+  static List<String> getAvailableCourses() {
+    final set = fetchUniversities().map((e) => e.course).toSet();
+    set.add('All');
+    return set.toList();
+  }
+
+  static List<String> getAvailableUniversities() {
+    final set = fetchUniversities().map((e) => e.label).toSet();
+    set.add('');
+    return set.toList();
   }
 }
 
