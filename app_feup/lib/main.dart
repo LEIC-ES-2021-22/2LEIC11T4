@@ -7,6 +7,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sentry/sentry.dart';
 import 'package:redux/redux.dart';
 import 'package:uni/controller/middleware.dart';
+import 'package:uni/model/Erasmus/erasmus_paperwork_model.dart';
 import 'package:uni/model/app_state.dart';
 import 'package:uni/redux/actions.dart';
 import 'package:uni/redux/reducers.dart';
@@ -122,7 +123,7 @@ class MyAppState extends State<MyApp> {
 
               case '/' + Constants.navErasmusPaperwork:
                 return PageTransition.makePageTransition(
-                    page: ErasmusPaperworkView(), settings: settings);
+                    page: ErasmusPaperworkModel(), settings: settings);
 
               case '/' + Constants.navErasmusUniversityPage:
                 return PageTransition.makePageTransition(
