@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../model/erasmus/erasmus_api.dart';
 import '../generic_card.dart';
 
 /// Manages the 'Current account' section inside the user's page (accessible
@@ -31,6 +33,68 @@ class ErasmusNavigationCard extends GenericCard {
     Navigator.pushNamed(context, '/' + this.gotoPage);
   }
 }
+
+
+class ErasmusUniversityCard extends GenericCard {
+  final UniversityItem uni;
+  Image uniPhoto;
+  final gotoPage;
+
+  ErasmusUniversityCard(this.uni, this.gotoPage, this.uniPhoto);
+
+  ErasmusUniversityCard.fromEditingInformation(Key key, bool editingMode,
+      Function onDelete, this.uni, this.gotoPage, this.uniPhoto)
+      : super.fromEditingInformation(key, editingMode, onDelete);
+
+  @override
+  Widget buildCardContent(BuildContext context) {
+    final MediaQueryData queryData = MediaQuery.of(context);
+    /*
+    Wrap(direction: Axis.horizontal,
+        crossAxisAlignment: WrapCrossAlignment.start,
+        spacing: 30,
+        runSpacing: 15,
+     */
+    return Row(
+        children: [
+            Container(
+                width: queryData.size.height / 7,
+                height: queryData.size.height / 7,
+                child: uniPhoto
+                ),
+                SizedBox(width: 30),
+            Expanded(child : Column(
+              children: [
+                Text(uni.name,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.headline2),
+                SizedBox(height: 10),
+                Text('International Ranking:',
+                    style: Theme.of(context).textTheme.subtitle2),
+                SizedBox(height: 5),
+                Text(uni.rank,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .apply(
+                        fontSizeDelta: -57,
+                        fontWeightDelta: -3)),
+              ],
+            ),
+            ),
+        ]
+    );
+  }
+
+  @override
+  String getTitle() => this.uni.label;
+
+  @override
+  onClick(BuildContext context) {
+    Navigator.pushNamed(context, '/' + this.gotoPage);
+  }
+}
+
 
 
 /* 
