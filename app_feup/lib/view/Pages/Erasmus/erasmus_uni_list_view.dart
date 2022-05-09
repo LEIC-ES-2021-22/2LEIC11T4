@@ -1,6 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:uni/utils/constants.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 
 import '../../Widgets/Erasmus/eramus_nav_card_rows.dart';
