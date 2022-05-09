@@ -22,3 +22,4 @@ const navErasmusAbout = 'Erasmus About';
 const navErasmusStudentsList = 'Erasmus Student List';
 const navErasmusUniversitiesList = 'Erasmus University List';
 const navErasmusReviewList = 'Erasmus Review List';
+const navErasmusMainUni = 'Erasmus Main Uni';

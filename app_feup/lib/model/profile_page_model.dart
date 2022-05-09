@@ -43,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
       if (StoreProvider.of<AppState>(context).state.content['profile'] !=
           null) {
         name =
-            StoreProvider.of<AppState>(context).state.content['profile'].label;
+            StoreProvider.of<AppState>(context).state.content['profile'].name;
         email =
             StoreProvider.of<AppState>(context).state.content['profile'].email;
         currentState =
