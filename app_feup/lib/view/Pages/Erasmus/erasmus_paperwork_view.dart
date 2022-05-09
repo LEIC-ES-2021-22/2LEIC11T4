@@ -17,7 +17,7 @@ class ErasmusPaperworkViewState extends GeneralPageViewState {
         Container(
             child: SvgPicture.asset(
           'assets/images/ni_logo.svg',
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           width: queryData.size.height / 7,
           height: queryData.size.height / 7,
         )),

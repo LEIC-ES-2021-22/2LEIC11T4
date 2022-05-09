@@ -1,41 +1,80 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
+
+import '../../Widgets/Erasmus/eramus_nav_card_rows.dart';
+import '../../../model/erasmus/erasmus_api.dart';
 
 class ErasmusUniversityListView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ErasmusUniversityListViewState();
 }
 
-/// Manages the 'about' section of the app.
 class ErasmusUniversityListViewState extends GeneralPageViewState {
+  String selectedCountry = 'All';
+  String selectedCourse = 'All';
+  String searchUni = '';
+
   @override
   Widget getBody(BuildContext context) {
-    final MediaQueryData queryData = MediaQuery.of(context);
     return ListView(
       children: <Widget>[
-        Container(
-            child: SvgPicture.asset(
-          'assets/images/ni_logo.svg',
-          color: Theme.of(context).accentColor,
-          width: queryData.size.height / 7,
-          height: queryData.size.height / 7,
-        )),
-        Center(
-            child: Padding(
-          padding: EdgeInsets.only(
-              left: queryData.size.width / 12,
-              right: queryData.size.width / 12,
-              top: queryData.size.width / 12,
-              bottom: queryData.size.width / 12),
-          child: Column(children: <Widget>[
-            Text(
-              'University list \n\n',
-              textScaleFactor: 1.5,
-            ),
-            Text('TODO')
-          ]),
-        ))
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: DropdownSearch<dynamic>(
+            mode: Mode.MENU,
+            items: ErasmusAPI.getAvailableUniversities(),
+            showSearchBox: true,
+            onChanged: (value) {
+              setState(() {
+                searchUni = value;
+              });
+            },
+            selectedItem: searchUni,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                ListTile(
+                  title: Text('Country'),
+                  trailing: DropdownButton<String>(
+                    hint: Text('Country'),
+                    items: ErasmusAPI.getAvailableCountries()
+                        .map((e) =>
+                            DropdownMenuItem<String>(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedCountry = value;
+                      });
+                    },
+                    value: selectedCountry,
+                  ),
+                ),
+                ListTile(
+                  title: Text('Course'),
+                  trailing: DropdownButton<String>(
+                    hint: Text('Course'),
+                    items: ErasmusAPI.getAvailableCourses()
+                        .map((e) =>
+                            DropdownMenuItem<String>(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedCourse = value;
+                      });
+                    },
+                    value: selectedCourse,
+                  ),
+                ),
+              ]),
+        ),
+        UniversityRows(
+            items: ErasmusAPI.getUniversitiesFromSearch(
+                searchUni, selectedCountry, selectedCourse)),
       ],
     );
   }
