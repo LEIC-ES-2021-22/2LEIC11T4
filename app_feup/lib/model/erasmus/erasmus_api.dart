@@ -1,11 +1,11 @@
 
 class UniversityItem {
-  String label;
-  String name;
-  String rank;
-  String country;
-  String course;
-  String imgUrl = 'https://picsum.photos/seed/picsum/200/300';
+  final String label;
+  final String name;
+  final String rank;
+  final String country;
+  final String course;
+  final String imgUrl;
 
 
   dynamic value;
@@ -66,7 +66,7 @@ class ErasmusAPI {
   static List<UniversityItem> getUniversitiesFromSearch(String search,
       String country, String course) {
 
-      var list = fetchUniversities();
+      final list = fetchUniversities();
 
       if (search.isEmpty && country == 'All' && course == 'All') {
         return list;
