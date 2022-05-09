@@ -7,7 +7,7 @@ import 'erasmus_nav_card.dart';
 
 class UniversityRows extends StatelessWidget {
 
-  List<UniversityItem> items;
+  final List<UniversityItem> items;
 
 
   UniversityRows(
