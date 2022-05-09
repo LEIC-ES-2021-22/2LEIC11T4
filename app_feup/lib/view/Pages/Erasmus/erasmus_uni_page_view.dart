@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../model/erasmus/erasmus_api.dart';
 
 class ErasmusUniversityPageView extends StatefulWidget {
   @override
@@ -12,15 +15,14 @@ class ErasmusUniversityPageView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityPageViewState extends GeneralPageViewState {
+  UniversityItem university =
+      ErasmusAPI.getUniversity(Random(DateTime.now().second).nextInt(10));
+
   gotoErasmusUniReviewMake(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview);
 
   gotoErasmusUniReviewList(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusReviewList);
-
-  final String descriptionText = '''
-Dolorum perferendis nesciunt rerum recusandae quia dolorem laudantium. Necessitatibus consequuntur eum nulla culpa. Temporibus accusantium consequatur sapiente adipisci aliquam. Aperiam eligendi ut cum.
-''';
 
   @override
   Widget getBody(BuildContext context) {
@@ -32,29 +34,27 @@ Dolorum perferendis nesciunt rerum recusandae quia dolorem laudantium. Necessita
           children: [
             Container(
                 padding: const EdgeInsets.all(10),
-                child: SvgPicture.asset(
-                  'assets/images/ni_logo.svg',
-                  color: Theme.of(context).colorScheme.secondary,
-                  width: queryData.size.height / 5,
-                  height: queryData.size.height / 5,
-                )),
+                margin: const EdgeInsets.all(5),
+                width: queryData.size.height / 5,
+                height: queryData.size.height / 5,
+                child: Image.network(university.imgUrl)),
             Center(
                 child: Padding(
               padding: const EdgeInsets.all(10),
               child: Column(children: <Widget>[
                 Text(
-                  'Faculdade de Engenharia\n',
+                  university.label + '\n',
                   textScaleFactor: 1.2,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Portugal\n',
+                  university.country + '\n',
                   textScaleFactor: 1,
                 ),
                 TextLink(
-                  '317 th',
+                  university.rank,
                   'https://cwur.org/2021-22.php',
                   preText: 'Ranking: ',
                 ),
@@ -66,9 +66,9 @@ Dolorum perferendis nesciunt rerum recusandae quia dolorem laudantium. Necessita
             child: Column(
           children: [
             TextLink(
-              'fe.up.pt',
-              'https://fe.up.pt',
-              preText: 'Website:  ',
+              university.link,
+              university.link,
+              preText: '\nWebsite:  ',
               postText: '\n',
             ),
             Text(
@@ -83,7 +83,7 @@ Dolorum perferendis nesciunt rerum recusandae quia dolorem laudantium. Necessita
         Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
           child: Text(
-            descriptionText,
+            university.description,
             textScaleFactor: 1.1,
             textAlign: TextAlign.justify,
           ),
