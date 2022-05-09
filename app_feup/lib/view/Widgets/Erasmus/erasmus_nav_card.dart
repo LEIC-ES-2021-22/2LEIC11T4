@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../model/erasmus/erasmus_api.dart';
 import '../generic_card.dart';
 
 /// Manages the 'Current account' section inside the user's page (accessible
@@ -33,53 +34,56 @@ class ErasmusNavigationCard extends GenericCard {
 }
 
 
-/* 
+class ErasmusUniversityCard extends GenericCard {
+  final UniversityItem uni;
+  final gotoPage;
 
-      Table(
-          columnWidths: {1: FractionColumnWidth(.4)},
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children: [
-            TableRow(children: [
-              Container(
-                margin:
-                    const EdgeInsets.only(top: 20.0, bottom: 8.0, left: 20.0),
-                child: Text('Saldo: ',
+  ErasmusUniversityCard(this.uni, this.gotoPage);
+
+  ErasmusUniversityCard.fromEditingInformation(Key key, bool editingMode,
+      Function onDelete, this.uni, this.gotoPage)
+      : super.fromEditingInformation(key, editingMode, onDelete);
+
+  @override
+  Widget buildCardContent(BuildContext context) {
+    final MediaQueryData queryData = MediaQuery.of(context);
+
+    return Row(
+        children: [
+            Container(
+                width: queryData.size.height / 7,
+                height: queryData.size.height / 7,
+                child: Image.network(uni.imgUrl)
+                ),
+                SizedBox(width: 30),
+            Expanded(child : Column(
+              children: [
+                Text(uni.name,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.headline2),
+                SizedBox(height: 10),
+                Text('International Ranking:',
+                    style: Theme.of(context).textTheme.subtitle2),
+                SizedBox(height: 5),
+                Text(uni.rank,
                     style: Theme.of(context)
                         .textTheme
-                        .headline4
-                        .apply(fontSizeDelta: -4)),
-              ),
-              Container(
-                margin:
-                    const EdgeInsets.only(top: 20.0, bottom: 8.0, right: 30.0),
-                child: StoreConnector<AppState, String>(
-                    converter: (store) => store.state.content['feesBalance'],
-                    builder: (context, feesBalance) =>
-                        getInfoText(feesBalance, context)),
-              )
-            ]),
-            TableRow(children: [
-              Container(
-                margin:
-                    const EdgeInsets.only(top: 8.0, bottom: 20.0, left: 20.0),
-                child: Text('Data limite próxima prestação: ',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        .apply(fontSizeDelta: -4)),
-              ),
-              Container(
-                margin:
-                    const EdgeInsets.only(top: 8.0, bottom: 20.0, right: 30.0),
-                child: StoreConnector<AppState, String>(
-                    converter: (store) => store.state.content['feesLimit'],
-                    builder: (context, feesLimit) =>
-                        getInfoText(feesLimit, context)),
-              )
-            ]),
-          ]),
-      StoreConnector<AppState, String>(
-          converter: (store) => store.state.content['feesRefreshTime'],
-          builder: (context, feesRefreshTime) =>
-              this.showLastRefreshedTime(feesRefreshTime, context))
-    */
+                        .headline1
+                        .apply(
+                        fontSizeDelta: -57,
+                        fontWeightDelta: -3)),
+              ],
+            ),
+            ),
+        ]
+    );
+  }
+
+  @override
+  String getTitle() => this.uni.label;
+
+  @override
+  onClick(BuildContext context) {
+    Navigator.pushNamed(context, '/' + this.gotoPage);
+  }
+}
