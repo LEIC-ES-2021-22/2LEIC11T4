@@ -30,7 +30,7 @@ class ErasmusReviewListViewState extends GeneralPageViewState {
               bottom: queryData.size.width / 12),
           child: Column(children: <Widget>[
             Text(
-              'Review list\n\n',
+              'University See Review list\n\n',
               textScaleFactor: 1.5,
             ),
             Text('TODO')
