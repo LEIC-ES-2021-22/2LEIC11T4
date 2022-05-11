@@ -33,50 +33,44 @@ class ErasmusNavigationCard extends GenericCard {
   }
 }
 
-
 class ErasmusUniversityCard extends GenericCard {
   final UniversityItem uni;
   final gotoPage;
 
   ErasmusUniversityCard(this.uni, this.gotoPage);
 
-  ErasmusUniversityCard.fromEditingInformation(Key key, bool editingMode,
-      Function onDelete, this.uni, this.gotoPage)
+  ErasmusUniversityCard.fromEditingInformation(
+      Key key, bool editingMode, Function onDelete, this.uni, this.gotoPage)
       : super.fromEditingInformation(key, editingMode, onDelete);
 
   @override
   Widget buildCardContent(BuildContext context) {
     final MediaQueryData queryData = MediaQuery.of(context);
 
-    return Row(
-        children: [
-            Container(
-                width: queryData.size.height / 7,
-                height: queryData.size.height / 7,
-                child: Image.network(uni.imgUrl)
-                ),
-                SizedBox(width: 30),
-            Expanded(child : Column(
-              children: [
-                Text(uni.name,
-                    softWrap: true,
-                    style: Theme.of(context).textTheme.headline2),
-                SizedBox(height: 10),
-                Text('International Ranking:',
-                    style: Theme.of(context).textTheme.subtitle2),
-                SizedBox(height: 5),
-                Text(uni.rank,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1
-                        .apply(
-                        fontSizeDelta: -57,
-                        fontWeightDelta: -3)),
-              ],
-            ),
-            ),
-        ]
-    );
+    return Row(children: [
+      Container(
+          width: queryData.size.height / 7,
+          height: queryData.size.height / 7,
+          child: Image.network(uni.imgUrl)),
+      SizedBox(width: 30),
+      Expanded(
+        child: Column(
+          children: [
+            Text(uni.name,
+                softWrap: true, style: Theme.of(context).textTheme.headline2),
+            SizedBox(height: 10),
+            Text('International Ranking:',
+                style: Theme.of(context).textTheme.subtitle2),
+            SizedBox(height: 5),
+            Text(uni.rank,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline1
+                    .apply(fontSizeDelta: -57, fontWeightDelta: -3)),
+          ],
+        ),
+      ),
+    ]);
   }
 
   @override

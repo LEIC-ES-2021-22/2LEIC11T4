@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 
-class ErasmusReviewListView extends StatefulWidget {
+class ErasmusUniversityReviewView extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => ErasmusReviewListViewState();
+  State<StatefulWidget> createState() => ErasmusUniversityReviewViewState();
 }
 
 /// Manages the 'about' section of the app.
-class ErasmusReviewListViewState extends GeneralPageViewState {
+class ErasmusUniversityReviewViewState extends GeneralPageViewState {
   @override
   Widget getBody(BuildContext context) {
     final MediaQueryData queryData = MediaQuery.of(context);
@@ -17,7 +17,7 @@ class ErasmusReviewListViewState extends GeneralPageViewState {
         Container(
             child: SvgPicture.asset(
           'assets/images/ni_logo.svg',
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           width: queryData.size.height / 7,
           height: queryData.size.height / 7,
         )),
@@ -30,7 +30,7 @@ class ErasmusReviewListViewState extends GeneralPageViewState {
               bottom: queryData.size.width / 12),
           child: Column(children: <Widget>[
             Text(
-              'Review list\n\n',
+              'University Make Review \n\n',
               textScaleFactor: 1.5,
             ),
             Text('TODO')
