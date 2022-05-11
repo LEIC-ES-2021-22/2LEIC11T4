@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../model/erasmus/erasmus_api.dart';
+import '../../Pages/Erasmus/erasmus_uni_page_view.dart';
 import '../generic_card.dart';
 
-/// Manages the 'Current account' section inside the user's page (accessible
-/// through the top-right widget with the user picture)
 class ErasmusNavigationCard extends GenericCard {
   final String title;
   final String text;
@@ -79,5 +78,6 @@ class ErasmusUniversityCard extends GenericCard {
   @override
   onClick(BuildContext context) {
     Navigator.pushNamed(context, '/' + this.gotoPage);
+    ErasmusUniversityPageViewState.university = this.uni;
   }
 }
