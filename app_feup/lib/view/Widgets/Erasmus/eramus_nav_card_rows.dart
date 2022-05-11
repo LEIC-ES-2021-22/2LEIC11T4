@@ -39,7 +39,7 @@ class UniversityRows extends StatelessWidget {
       widgets.add(
         ErasmusUniversityCard(
           element,
-          Constants.navErasmusUniversityPage, // TODO: In a new issue
+          Constants.navErasmusUniversityPage,
         ),
       );
     });

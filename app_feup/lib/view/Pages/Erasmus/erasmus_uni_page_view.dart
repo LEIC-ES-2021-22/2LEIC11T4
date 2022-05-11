@@ -15,8 +15,8 @@ class ErasmusUniversityPageView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityPageViewState extends GeneralPageViewState {
-  UniversityItem university =
-      ErasmusAPI.getUniversity(Random(DateTime.now().second).nextInt(10));
+  static UniversityItem university =
+      ErasmusAPI.getUniversity(0);
 
   gotoErasmusUniReviewMake(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview);
