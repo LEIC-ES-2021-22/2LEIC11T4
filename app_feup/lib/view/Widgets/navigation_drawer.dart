@@ -39,6 +39,7 @@ class NavigationDrawerState extends State<NavigationDrawer> {
       Constants.navErasmusMap: _onSelectPage,
       Constants.navErasmusStudentsList: _onSelectPage,
       Constants.navErasmusUniversitiesList: _onSelectPage,
+      Constants.navErasmusMainUni: _onSelectPage,
       Constants.navErasmusReviewList: _onSelectPage,
       Constants.navErasmusAbout: _onSelectPage,
     };

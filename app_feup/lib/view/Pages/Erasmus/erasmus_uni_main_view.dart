@@ -5,13 +5,13 @@ import 'package:uni/utils/constants.dart' as Constants;
 
 import '../../Widgets/Erasmus/erasmus_nav_card.dart';
 
-class ErasmusMainPageView extends StatefulWidget {
+class ErasmusMainUniView extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => ErasmusMainPageViewState();
+  State<StatefulWidget> createState() => ErasmusMainUniViewState();
 }
 
 /// Manages the 'about' section of the app.
-class ErasmusMainPageViewState extends GeneralPageViewState {
+class ErasmusMainUniViewState extends GeneralPageViewState {
   gotoErasmusAbout(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusAbout);
 
@@ -36,24 +36,17 @@ class ErasmusMainPageViewState extends GeneralPageViewState {
               bottom: queryData.size.width * 0.06),
           child: Column(children: <Widget>[
             Text(
-              'Erasmus Unite \n\n',
+              'Universities Main \n\n',
               textScaleFactor: 1.5,
             ),
-            ErasmusNavigationCard('Students', 'Find other Erasmus students',
-                Constants.navErasmusStudentsList),
             ErasmusNavigationCard(
-                'Universities',
-                'Find info about Erasmus Universities',
-                Constants.navErasmusMainUni),
+                'University List',
+                'Find all available universities',
+                Constants.navErasmusUniversitiesList),
             ErasmusNavigationCard(
-                'Paperwork',
-                'Find all you need to enroll in Erasmus',
-                Constants.navErasmusPaperwork),
-            TextButton(
-                onPressed: () {
-                  gotoErasmusAbout(context);
-                },
-                child: Text('About Erasmus')),
+                'University Map',
+                'Find universities using an interactive map',
+                Constants.navErasmusMap),
           ]),
         ))
       ],
