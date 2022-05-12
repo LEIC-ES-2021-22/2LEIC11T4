@@ -38,6 +38,7 @@ class ErasmusMainPageViewState extends GeneralPageViewState {
             Text(
               'Erasmus Unite \n\n',
               textScaleFactor: 1.5,
+              key: Key('Erasmus Unite Title'),
             ),
             ErasmusNavigationCard('Students', 'Find other Erasmus students',
                 Constants.navErasmusStudentsList),

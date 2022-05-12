@@ -17,10 +17,13 @@ class ErasmusNavigationCard extends GenericCard {
 
   @override
   Widget buildCardContent(BuildContext context) {
-    return Column(children: [
-      Text(''),
-      Text(this.text, style: Theme.of(context).textTheme.headline4),
-    ]);
+    return Column(
+      children: [
+        Text(''),
+        Text(this.text, style: Theme.of(context).textTheme.headline4),
+      ],
+      //key: Key('$title'),
+    );
   }
 
   @override

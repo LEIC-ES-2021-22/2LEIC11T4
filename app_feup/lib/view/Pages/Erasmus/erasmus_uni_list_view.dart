@@ -18,6 +18,7 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
   @override
   Widget getBody(BuildContext context) {
     return ListView(
+      key: Key('key_Universities List'),
       children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
