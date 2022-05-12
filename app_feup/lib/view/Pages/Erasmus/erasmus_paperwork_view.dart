@@ -32,6 +32,7 @@ class ErasmusPaperworkViewState extends GeneralPageViewState {
             Text(
               'Paperwork Page \n\n',
               textScaleFactor: 1.5,
+              key: Key('Paperwork Page Title'),
             ),
             Text('TODO')
           ]),

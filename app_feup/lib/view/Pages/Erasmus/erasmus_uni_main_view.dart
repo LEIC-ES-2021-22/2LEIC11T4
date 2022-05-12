@@ -21,34 +21,42 @@ class ErasmusMainUniViewState extends GeneralPageViewState {
     return ListView(
       children: <Widget>[
         Container(
-            child: SvgPicture.asset(
-          'assets/images/ni_logo.svg',
-          color: Theme.of(context).colorScheme.secondary,
-          width: queryData.size.height / 10,
-          height: queryData.size.height / 10,
-        )),
+          child: SvgPicture.asset(
+            'assets/images/ni_logo.svg',
+            color: Theme.of(context).colorScheme.secondary,
+            width: queryData.size.height / 10,
+            height: queryData.size.height / 10,
+          )
+        ),
         Center(
-            child: Padding(
-          padding: EdgeInsets.only(
+          child: Padding(
+            padding: EdgeInsets.only(
               left: queryData.size.width * 0.06,
               right: queryData.size.width * 0.06,
               top: queryData.size.width * 0.06,
-              bottom: queryData.size.width * 0.06),
-          child: Column(children: <Widget>[
-            Text(
-              'Universities Main \n\n',
-              textScaleFactor: 1.5,
+              bottom: queryData.size.width * 0.06
             ),
-            ErasmusNavigationCard(
+
+            child: Column(
+                children: <Widget>[
+              Text(
+                'Universities Main \n\n',
+                textScaleFactor: 1.5,
+                key: Key('Universities Main Title'),
+              ),
+              ErasmusNavigationCard(
                 'University List',
                 'Find all available universities',
-                Constants.navErasmusUniversitiesList),
-            ErasmusNavigationCard(
+                Constants.navErasmusUniversitiesList,
+              ),
+              ErasmusNavigationCard(
                 'University Map',
                 'Find universities using an interactive map',
-                Constants.navErasmusMap),
-          ]),
-        ))
+                Constants.navErasmusMap
+              ),
+            ]),
+          )
+        )
       ],
     );
   }
