@@ -1,3 +1,5 @@
+import 'package:uni/view/Pages/Erasmus/star_evaluation_view.dart';
+
 class UniversityItem {
   final String label;
   final String name;
@@ -6,9 +8,9 @@ class UniversityItem {
   final String course;
   final String link;
   final String imgUrl;
-  final String description =
-      '''Dolorum perferendis nesciunt rerum recusandae quia dolorem laudantium. Necessitatibus consequuntur eum nulla culpa. Temporibus accusantium consequatur sapiente adipisci aliquam. Aperiam eligendi ut cum.''';
-
+  final String description;
+  final UniversityStarEvaluation stars;
+  // the stars should come from the medium of the db
   dynamic value;
 
   UniversityItem(
@@ -19,7 +21,9 @@ class UniversityItem {
       this.country,
       this.link,
       this.course,
-      this.imgUrl});
+      this.imgUrl,
+      this.description,
+      this.stars});
 
   factory UniversityItem.fromJson(Map<String, dynamic> json) {
     return UniversityItem(
@@ -30,7 +34,8 @@ class UniversityItem {
         country: json['country'],
         course: json['course'],
         link: json['link'],
-        imgUrl: json['imgUrl']);
+        imgUrl: json['imgUrl'],
+        description: json['description']);
   }
 }
 
@@ -45,7 +50,12 @@ class ErasmusAPI {
           country: 'Portugal',
           course: 'Engenharia de Software',
           link: 'https://fe.up.pt',
-          imgUrl: 'https://picsum.photos/200'),
+          imgUrl: 'https://scontent.flis3-1.fna.fbcdn.net/v/t1.18169-9/13925143_10155132300429966_2629964604059470060_n.png?_nc_cat=111&ccb=1-6&_nc_sid=09cbfe&_nc_ohc=8YfdjtND2NAAX9FHSU2&_nc_ht=scontent.flis3-1.fna&oh=00_AT9mFrgUJBq1h5pwS2cXT-BDFHxCx5DIv_omR_wY5sR58w&oe=62A1726F',
+          description: 'FEUP, is one of the most prestigious universities '
+              'in Portugal, Oporto. The university has a great impact in the '
+              'formation of students, being responsible for great achievements'
+              ' in the engineering area. ',
+          stars: UniversityStarEvaluation(5,5,5,5)),
       UniversityItem(
           label: 'Harvard',
           name: 'Harvard University',
@@ -54,7 +64,11 @@ class ErasmusAPI {
           country: 'U.S.A',
           course: 'Direito',
           link: 'https://harvard.edu',
-          imgUrl: 'https://picsum.photos/200'),
+          imgUrl: 'https://upload.wikimedia.org/wikipedia/pt/2/29/Harvard_Logo.svg.png',
+          description: 'Harvard is the most prestigious University in the '
+              'world. Situated in Massachusetts, U.S.A, harvard is a center '
+              'of innovation, passion and future',
+          stars: UniversityStarEvaluation(2,1,5,5)),
       UniversityItem(
           label: 'MIT',
           name: 'Massachusetts Institute of Technology',
@@ -63,7 +77,11 @@ class ErasmusAPI {
           country: 'U.S.A',
           course: 'Ciência de computadores',
           link: 'https://web.mit.edu',
-          imgUrl: 'https://picsum.photos/200'),
+          imgUrl: 'https://fastly.4sqi.net/img/general/200x200/6xtjxAwTDE3zp43q07GuSid3At539BZd5d-Jpn7txj0.jpg',
+          description: 'The MIT is situated in Massachusetts, U.S.A. It is one '
+              'of the most prestigious universities to work in the fields of'
+              ' engineering. ',
+          stars:  UniversityStarEvaluation(2,1,4,5)),
       UniversityItem(
           label: 'FEP',
           name: 'Faculdade de economia do Porto',
@@ -72,7 +90,12 @@ class ErasmusAPI {
           country: 'Portugal',
           course: 'Economia',
           link: 'https://fep.up.pt',
-          imgUrl: 'https://picsum.photos/200'),
+          imgUrl: 'https://eduportugal.eu/wp-content/uploads/2021/05/FEP_logo-institucional-263x200.png',
+          description: 'The Faculty of economy of University of Porto, is well '
+              'known for the contribution it has in forming students in the '
+              'economical areas. Being responsible in the formation of the best'
+              'managers in Portugal',
+          stars:  UniversityStarEvaluation(5,5,4,4)),
       UniversityItem(
           label: 'FLUP',
           name: 'Faculdade de letras da universidade do Porto',
@@ -81,7 +104,12 @@ class ErasmusAPI {
           country: 'Portugal',
           course: 'História',
           link: 'https://sigarra.up.pt/flup',
-          imgUrl: 'https://picsum.photos/200'),
+          imgUrl: 'https://www.porto.pt/_next/image?url=https%3A%2F%2Fmedia.porto.pt%2Foriginal_images%2FDR_flup.jpg&w=730&q=85',
+          description: 'The Faculty of letters of University of Porto, is well'
+              'known for the passion the students have in discovering, reading '
+              'and writing. The courses provided are based from the fields of '
+              'languages and history',
+          stars:  UniversityStarEvaluation(5,5,4,4) ),
       UniversityItem(
           label: 'UMinho',
           name: 'Universidade do Minho',
@@ -90,7 +118,11 @@ class ErasmusAPI {
           country: 'Portugal',
           course: 'Engenharia de Software',
           link: 'https://www.uminho.pt/PT',
-          imgUrl: 'https://picsum.photos/200')
+          imgUrl: 'https://inspiring.future.pt/uploads/university/logo/41/minho.png',
+          description: 'The university of minho is becoming more and more '
+              'well-seen by the international community. City of Braga offers'
+              'great historical places that international students can see',
+          stars:  UniversityStarEvaluation(4,5,4,4))
     ];
   }
 
