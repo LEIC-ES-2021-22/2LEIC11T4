@@ -30,7 +30,7 @@ class ErasmusPaperworkView extends StatelessWidget {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: <Widget>[
-          PageTitle(name: 'Horário'),
+          PageTitle(name: 'Paperwork'),
           TabBar(
             controller: tabController,
             isScrollable: true,

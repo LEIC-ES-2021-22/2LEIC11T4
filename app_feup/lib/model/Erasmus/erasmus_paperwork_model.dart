@@ -16,23 +16,20 @@ class ErasmusPaperworkModel extends StatefulWidget {
 
 class _ErasmusPaperworkModelState extends SecondaryPageViewState
     with SingleTickerProviderStateMixin {
-  final int weekDay = DateTime.now().weekday;
 
   TabController tabController;
   ScrollController scrollViewController;
 
-  final List<String> daysOfTheWeek = [
-    'Segunda-feira',
-    'Terça-feira',
-    'Quarta-feira',
-    'Quinta-feira',
-    'Sexta-feira'
+  final List<String> tabs = [
+    'How to participate',
+    'Scholarships',
+    'More about Erasmus'
   ];
 
   List<List<Lecture>> _groupLecturesByDay(schedule) {
     final aggLectures = <List<Lecture>>[];
 
-    for (int i = 0; i < daysOfTheWeek.length; i++) {
+    for (int i = 0; i < tabs.length; i++) {
       final List<Lecture> lectures = <Lecture>[];
       for (int j = 0; j < schedule.length; j++) {
         if (schedule[j].day == i) lectures.add(schedule[j]);
@@ -45,9 +42,8 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
   @override
   void initState() {
     super.initState();
-    tabController = TabController(vsync: this, length: daysOfTheWeek.length);
-    final offset = (weekDay > 5) ? 0 : (weekDay - 1) % daysOfTheWeek.length;
-    tabController.animateTo((tabController.index + offset));
+    tabController = TabController(vsync: this, length: tabs.length);
+    tabController.animateTo((tabController.index));
   }
 
   @override
@@ -67,7 +63,7 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
         return ErasmusPaperworkView(
             tabController: tabController,
             scrollViewController: scrollViewController,
-            daysOfTheWeek: daysOfTheWeek,
+            daysOfTheWeek: tabs,
             aggLectures: _groupLecturesByDay(lectures),
             scheduleStatus: scheduleStatus);
       },
