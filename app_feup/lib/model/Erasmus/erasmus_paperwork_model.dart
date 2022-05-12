@@ -26,18 +26,13 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
     'More about Erasmus'
   ];
 
-  List<List<Lecture>> _groupLecturesByDay(schedule) {
-    final aggLectures = <List<Lecture>>[];
+  final List<String> text = [
+    'text0',
+    'text1',
+    'text2'
 
-    for (int i = 0; i < tabs.length; i++) {
-      final List<Lecture> lectures = <Lecture>[];
-      for (int j = 0; j < schedule.length; j++) {
-        if (schedule[j].day == i) lectures.add(schedule[j]);
-      }
-      aggLectures.add(lectures);
-    }
-    return aggLectures;
-  }
+  ];
+
 
   @override
   void initState() {
@@ -58,14 +53,12 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
       converter: (store) => Tuple2(store.state.content['schedule'],
           store.state.content['scheduleStatus']),
       builder: (context, lectureData) {
-        final lectures = lectureData.item1;
-        final scheduleStatus = lectureData.item2;
         return ErasmusPaperworkView(
             tabController: tabController,
             scrollViewController: scrollViewController,
-            daysOfTheWeek: tabs,
-            aggLectures: _groupLecturesByDay(lectures),
-            scheduleStatus: scheduleStatus);
+            tabBarContent: tabs,
+            text: text,
+            );
       },
     );
   }

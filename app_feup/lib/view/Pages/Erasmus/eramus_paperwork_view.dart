@@ -1,23 +1,23 @@
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:uni/model/app_state.dart';
 import 'package:uni/model/entities/lecture.dart';
 import 'package:flutter/material.dart';
 import 'package:uni/view/Widgets/page_title.dart';
 import 'package:uni/view/Widgets/request_dependent_widget_builder.dart';
 import 'package:uni/view/Widgets/schedule_slot.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-/// Manages the 'schedule' sections of the app
+/// Manages the 'paperwork' sections of the app
 class ErasmusPaperworkView extends StatelessWidget {
   ErasmusPaperworkView(
       {Key key,
         @required this.tabController,
-        @required this.daysOfTheWeek,
-        @required this.aggLectures,
-        @required this.scheduleStatus,
+        @required this.tabBarContent,
+        @required this.text,
         this.scrollViewController});
 
-  final List<String> daysOfTheWeek;
-  final List<List<Lecture>> aggLectures;
-  final RequestStatus scheduleStatus;
+  final List<String> tabBarContent;
+  final List<String> text;
   final TabController tabController;
   final ScrollController scrollViewController;
 
@@ -41,7 +41,7 @@ class ErasmusPaperworkView extends StatelessWidget {
       Expanded(
           child: TabBarView(
             controller: tabController,
-            children: createSchedule(context),
+            children: createPaperwork(context),
           ))
     ]);
   }
@@ -49,66 +49,69 @@ class ErasmusPaperworkView extends StatelessWidget {
   /// Returns a list of widgets empty with tabs for each day of the week.
   List<Widget> createTabs(queryData, BuildContext context) {
     final List<Widget> tabs = <Widget>[];
-    for (var i = 0; i < daysOfTheWeek.length; i++) {
+    for (var i = 0; i < tabBarContent.length; i++) {
       tabs.add(Container(
         color: Theme.of(context).backgroundColor,
         width: queryData.size.width * 1 / 3,
-        child: Tab(key: Key('schedule-page-tab-$i'), text: daysOfTheWeek[i]),
+        child: Tab(key: Key('paperwork-page-tab-$i'), text: tabBarContent[i]),
       ));
     }
     return tabs;
   }
 
-  List<Widget> createSchedule(context) {
+  List<Widget> createPaperwork(context) {
     final List<Widget> tabBarViewContent = <Widget>[];
-    for (int i = 0; i < daysOfTheWeek.length; i++) {
-      tabBarViewContent.add(createScheduleByDay(context, i));
+    for (int i = 0; i < tabBarContent.length; i++) {
+      tabBarViewContent.add(createTabBody(context, i));
     }
     return tabBarViewContent;
   }
 
-  /// Returns a list of widgets for the rows with a singular class info.
-  List<Widget> createScheduleRows(lectures, BuildContext context) {
-    final List<Widget> scheduleContent = <Widget>[];
-    for (int i = 0; i < lectures.length; i++) {
-      final Lecture lecture = lectures[i];
-      scheduleContent.add(ScheduleSlot(
-        subject: lecture.subject,
-        typeClass: lecture.typeClass,
-        rooms: lecture.room,
-        begin: lecture.startTime,
-        end: lecture.endTime,
-        teacher: lecture.teacher,
-        classNumber: lecture.classNumber,
-      ));
-    }
-    return scheduleContent;
-  }
 
-  Widget Function(dynamic daycontent, BuildContext context) dayColumnBuilder(
-      int day) {
-    Widget createDayColumn(dayContent, BuildContext context) {
+  Widget Function(dynamic textContent, BuildContext context) displayTabContent(
+      int i) {
+    Widget tabContent(textContent, BuildContext context) {
       return Container(
-          key: Key('schedule-page-day-column-$day'),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: createScheduleRows(dayContent, context),
-          ));
+          key: Key('paperwork-page-day-column-$i'),
+          child: ListView(
+            children: <Widget>[
+              Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: textContent.length / 24,
+                        right: textContent.length / 24,
+                        top: textContent.length / 24,
+                        bottom: textContent.length / 24),
+                    child: Column(children: <Widget>[
+                      MarkdownBody(
+                        styleSheet: MarkdownStyleSheet(),
+                        shrinkWrap: false,
+                        data: textContent,
+                        onTapLink: (text, url, title) async {
+                          if (await canLaunch(url)) {
+                            await launch(url);
+                          }
+                        },
+                      ),
+                    ]),
+                  ))
+            ],
+          )
+      );
     }
 
-    return createDayColumn;
+    return tabContent;
   }
 
-  Widget createScheduleByDay(BuildContext context, int day) {
+  Widget createTabBody(BuildContext context, int i) {
     return RequestDependentWidgetBuilder(
       context: context,
-      status: scheduleStatus,
-      contentGenerator: dayColumnBuilder(day),
-      content: aggLectures[day],
-      contentChecker: aggLectures[day].isNotEmpty,
+      contentGenerator: displayTabContent(i),
+      content: text[i],
+      contentChecker: text[i].isNotEmpty,
       onNullContent:
-      Center(child: Text('Não possui aulas à ' + daysOfTheWeek[day] + '.')),
-      index: day,
+      Center(child: Text('Página em construção...')),
+      index: i,
     );
   }
 }
