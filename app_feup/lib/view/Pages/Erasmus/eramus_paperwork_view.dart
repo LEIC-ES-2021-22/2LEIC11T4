@@ -17,7 +17,7 @@ class ErasmusPaperworkView extends StatelessWidget {
         this.scrollViewController});
 
   final List<String> tabBarContent;
-  final List<String> text;
+  final List<RichText> text;
   final TabController tabController;
   final ScrollController scrollViewController;
 
@@ -46,7 +46,7 @@ class ErasmusPaperworkView extends StatelessWidget {
     ]);
   }
 
-  /// Returns a list of widgets empty with tabs for each day of the week.
+
   List<Widget> createTabs(queryData, BuildContext context) {
     final List<Widget> tabs = <Widget>[];
     for (var i = 0; i < tabBarContent.length; i++) {
@@ -78,28 +78,16 @@ class ErasmusPaperworkView extends StatelessWidget {
               Center(
                   child: Padding(
                     padding: EdgeInsets.only(
-                        left: textContent.length / 24,
-                        right: textContent.length / 24,
-                        top: textContent.length / 24,
-                        bottom: textContent.length / 24),
-                    child: Column(children: <Widget>[
-                      MarkdownBody(
-                        styleSheet: MarkdownStyleSheet(),
-                        shrinkWrap: false,
-                        data: textContent,
-                        onTapLink: (text, url, title) async {
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          }
-                        },
-                      ),
-                    ]),
+                        left: 20,
+                        right: 20,
+                        top: 30,
+                        bottom: 20),
+                    child: textContent,
                   ))
             ],
           )
       );
     }
-
     return tabContent;
   }
 
@@ -108,7 +96,7 @@ class ErasmusPaperworkView extends StatelessWidget {
       context: context,
       contentGenerator: displayTabContent(i),
       content: text[i],
-      contentChecker: text[i].isNotEmpty,
+      contentChecker: true,
       onNullContent:
       Center(child: Text('Página em construção...')),
       index: i,
