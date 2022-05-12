@@ -45,12 +45,11 @@ class NetworkRouter {
 
     if (response.statusCode == 200 || user == 'teste') {
       if (user == 'teste') {
-        print("HERE");
         final Session session = Session(
           authenticated: true,
           // studentNumber: '202007962',
           // type: 'A',
-          //  // cookies: String from NetworkRouter.extractCookies(response.headers)
+          //  cookies: String from NetworkRouter.extractCookies(response.headers)
           // the cookie has a expiration
         );
         session.persistentSession = persistentSession;
