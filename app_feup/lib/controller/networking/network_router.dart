@@ -43,6 +43,7 @@ class NetworkRouter {
       'pv_password': pass
     }).timeout(const Duration(seconds: loginRequestTimeout));
 
+    // put he user=='teste' inside the if
     if (response.statusCode == 200 ) { // || user == 'teste'
       //if (user == 'teste') {
         //final Session session = Session(
