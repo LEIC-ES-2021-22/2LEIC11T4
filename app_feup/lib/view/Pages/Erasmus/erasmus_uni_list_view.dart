@@ -5,7 +5,6 @@ import 'package:uni/view/Pages/general_page_view.dart';
 import '../../Widgets/Erasmus/eramus_nav_card_rows.dart';
 import '../../../model/erasmus/erasmus_api.dart';
 
-
 class ErasmusUniversityListView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ErasmusUniversityListViewState();
@@ -19,6 +18,7 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
   @override
   Widget getBody(BuildContext context) {
     return ListView(
+      key: Key('key_Universities List'),
       children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -26,7 +26,7 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
             mode: Mode.MENU,
             items: ErasmusAPI.getAvailableUniversities(),
             showSearchBox: true,
-            onChanged: (value){
+            onChanged: (value) {
               setState(() {
                 searchUni = value;
               });
@@ -34,20 +34,20 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
             selectedItem: searchUni,
           ),
         ),
-        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child:
-            Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
                 ListTile(
                   title: Text('Country'),
                   trailing: DropdownButton<String>(
                     hint: Text('Country'),
-                    items: ErasmusAPI.getAvailableCountries().map((e)
-                    =>DropdownMenuItem<String>(
-                        value: e, child: Text(e))
-                    ).toList(),
-                    onChanged: (value){
+                    items: ErasmusAPI.getAvailableCountries()
+                        .map((e) =>
+                            DropdownMenuItem<String>(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {
                       setState(() {
                         selectedCountry = value;
                       });
@@ -59,11 +59,11 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
                   title: Text('Course'),
                   trailing: DropdownButton<String>(
                     hint: Text('Course'),
-                    items: ErasmusAPI.getAvailableCourses().map((e)
-                    =>DropdownMenuItem<String>(
-                        value: e, child: Text(e))
-                    ).toList(),
-                    onChanged: (value){
+                    items: ErasmusAPI.getAvailableCourses()
+                        .map((e) =>
+                            DropdownMenuItem<String>(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {
                       setState(() {
                         selectedCourse = value;
                       });
@@ -71,13 +71,11 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
                     value: selectedCourse,
                   ),
                 ),
-            ]
-            ),
+              ]),
         ),
-        UniversityRows(items:
-          ErasmusAPI.getUniversitiesFromSearch(searchUni
-                , selectedCountry, selectedCourse)
-        ),
+        UniversityRows(
+            items: ErasmusAPI.getUniversitiesFromSearch(
+                searchUni, selectedCountry, selectedCourse)),
       ],
     );
   }
