@@ -16,7 +16,7 @@ jobs:
         with:
           flutter-version: '2.10.5'
       - run: flutter pub get
-      - run: flutter analyze lib/view/Pages/Erasmus --no-pub --preamble .
+      #- run: flutter analyze lib/view/Pages/Erasmus --no-pub --preamble .
       
   test:
     name: 'Test'
