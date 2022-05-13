@@ -40,15 +40,27 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
                 fontWeight: FontWeight.bold,
                 fontSize: 16)),
         TextSpan(
-          text: //"   Do you want to become an Erasmus student? In this section, you can find out the steps you have to follow to make this dream come true. \n\n"
-              //"   Erasmus+ is a big European program for education and training. It promotes cooperation at a higher educational level, either studying or in an internship.\n\n"
-              'If you want to participate in this experience, you have to meet all the following requirements at the (pre-)application date:\n\n'
-              "	       - Be regularly enrolled in a UP study cycle, conferring a Master’s degree. In case you are also enrolled in a Bachelor's degree we would like to stress that you will NOT have the opportunity to request exemption from classes; \n\n"
-              '        - Be a UE state-member citizen or from a country that participates in the program. The participation is equally extensible to political refugees and permanent residents;\n\n'
-              '        - Never had participated in the ERASMUS+ program (with or without a scholarship);\n\n'
-              '        - Do not benefit, at that moment, from any community financial support, through another program or action of the European Union.\n\n'
-              'The selected students must not only have their tuition fees at UP in order, but they must be able to maintain their enrolment at UP in the year in which they are going to carry out the mobility. In case of expiration, the mobility will be cancelled.\n\n'
-              'You can check the link below for all the rules of the mobility program.\n\n',
+          text:
+              'If you want to participate in this experience, you have to meet '
+              'all the following requirements at the (pre-)application date:\n'
+              '\n	      - Be regularly enrolled in a UP study cycle, conferring'
+              " a Master's degree. In case you are also enrolled in a "
+              "Bachelor's degree we would like to stress that you will NOT "
+              'have the opportunity to request exemption from classes; \n\n'
+              '       - Be a UE state-member citizen or from a country that '
+              'participates in the program. The participation is equally '
+              'extensible to political refugees and permanent residents;\n\n'
+              '       - Never had participated in the ERASMUS+ program '
+              '(with or without a scholarship);\n\n'
+              '       - Do not benefit, at that moment, from any '
+              'community financial support, through another program or action '
+              'of the European Union.\n\n'
+              'The selected students must not only have their tuition fees '
+              'at UP in order, but they must be able to maintain their '
+              'enrolment at UP in the year in which they are going to carry '
+              'out the mobility. In case of expiration, the mobility will be '
+              'cancelled.\n\nYou can check the link'
+              ' below for all the rules of the mobility program.\n\n',
           style: TextStyle(color: Colors.black),
         ),
         TextSpan(
@@ -82,14 +94,15 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
               ..onTap = () => launch(
                   'https://sigarra.up.pt/feup/pt/coop_candidatura_geral.inicio')),
         TextSpan(
-            text: "1st call",
+            text: '1st call',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         TextSpan(
             text:
-                " - January or February of the previous academic year (for 1st and 2nd semester)\n\n",
+                ' - January or February of the previous academic year '
+                '(for 1st and 2nd semester)\n\n',
             style: TextStyle(color: Colors.black)),
         TextSpan(
-            text: "2nd call",
+            text: '2nd call',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         TextSpan(
             text: ' - September (for remaining 2nd semester openings) \n\n\n',
@@ -104,11 +117,13 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
               ..onTap = () => launch(
                   'https://sigarra.up.pt/feup/pt/coop_candidatura_geral.ver_mobilidades')),
         TextSpan(
-            text:
-                '   As soon as the list resulting from the selection process is released, as a selected candidate you should formalize your application in SIGARRA, so that it can be validated and accepted by your College, according to this ',
+            text: '   As soon as the list resulting from the selection process '
+                'is released, as a selected candidate you should formalize '
+                'your, application in SIGARRA so that it can be validated and '
+                'accepted by your College, according to this ',
             style: TextStyle(color: Colors.black)),
         TextSpan(
-            text: "schedule.\n",
+            text: 'schedule.\n',
             style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
@@ -118,10 +133,11 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
                   'https://sigarra.up.pt/feup/pt/web_base.gera_pagina?P_pagina=1656')),
         TextSpan(
             text:
-                '   Before you submit your application, you must get approval from the ',
+                '   Before you submit your application, you must get approval '
+                'from the',
             style: TextStyle(color: Colors.black)),
         TextSpan(
-            text: "Course Mobility Coordinator.\n\n",
+            text: 'Course Mobility Coordinator.\n\n',
             style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
@@ -141,13 +157,18 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
                 fontWeight: FontWeight.bold,
                 fontSize: 16)),
         TextSpan(
-            text:
-                '   At UP, funding is managed by the International Relations Service (SRI) of rectorate, which will communicate to all mobility students, whether or not a grant has been awarded. This communication usually takes place in June/July (1st stage) and December/January (2nd stage).\n\n'
-                '   All students who are selected for Erasmus+ mobility, and have completed the application process properly, are automatically eligible for a scholarship. \n\n',
+            text: '   At UP, funding is managed by the International Relations '
+                'Service (SRI) of rectorate, which will communicate to all '
+                'mobility students, whether or not a grant has been awarded. '
+                'This communication usually takes place in June/July '
+                '(1st stage) and December/January (2nd stage).\n\n'
+                '   All students who are selected for Erasmus+ mobility, and '
+                'have completed the application process properly, '
+                'are automatically eligible for a scholarship. \n\n',
             style: TextStyle(color: Colors.black)),
         TextSpan(
-            text:
-                'Please note: Erasmus+ financial support is only for up to four months (120 days) of mobility.',
+            text: 'Please note: Erasmus+ financial support is only for '
+                'up to four months (120 days) of mobility.',
             style: TextStyle(
                 color: Colors.blueGrey,
                 fontWeight: FontWeight.bold,
@@ -173,8 +194,8 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
               ..onTap = () => launch(
                   'https://sigarra.up.pt/feup/pt/web_base.gera_pagina?P_pagina=31535')),
         TextSpan(
-            text:
-                " you can find the websites and contacts for all the IESs. If you have any questions, clarify them through these ",
+            text: ' you can find the websites and contacts for all the IESs.'
+                ' If you have any questions, clarify them through these ',
             style: TextStyle(color: Colors.black)),
         TextSpan(
             text: 'contacts',
@@ -186,8 +207,8 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
               ..onTap = () => launch(
                   'https://sigarra.up.pt/feup/pt/web_base.gera_pagina?p_pagina=31544')),
         TextSpan(
-            text:
-                '\n\n\nFor more information about this program check the following links: \n\n',
+            text: '\n\n\nFor more information about this program '
+                'check the following links: \n\n',
             style: TextStyle(color: Colors.black)),
         TextSpan(
             text: 'Erasmus program Overview \n\n',
@@ -239,26 +260,6 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
           text: createText(context),
         );
       },
-    );
-  }
-}
-
-class TextLink extends StatelessWidget {
-  final String linkText;
-  final String link;
-
-  TextLink(String this.linkText, String this.link, {Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-          text: linkText,
-          style: TextStyle(
-              color: Theme.of(context).colorScheme.secondary,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline),
-          recognizer: TapGestureRecognizer()..onTap = () => launch(link)),
     );
   }
 }
