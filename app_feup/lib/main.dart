@@ -6,6 +6,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:redux/redux.dart';
 import 'package:uni/controller/middleware.dart';
+import 'package:uni/model/erasmus/erasmus_paperwork_model.dart';
 import 'package:uni/model/app_state.dart';
 import 'package:uni/redux/actions.dart';
 import 'package:uni/redux/reducers.dart';
@@ -20,7 +21,6 @@ import 'package:uni/view/Pages/Erasmus/erasmus_uni_main_view.dart';
 import 'package:uni/view/Pages/about_page_view.dart';
 import 'package:uni/view/Pages/bug_report_page_view.dart';
 import 'package:uni/view/Pages/bus_stop_next_arrivals_page.dart';
-import 'package:uni/view/Pages/Erasmus/erasmus_paperwork_view.dart';
 import 'package:uni/view/Pages/Erasmus/erasmus_uni_page_view.dart';
 import 'package:uni/view/Pages/Erasmus/erasmus_uni_review_view.dart';
 import 'package:uni/view/Pages/exams_page_view.dart';
@@ -126,7 +126,7 @@ class MyAppState extends State<MyApp> {
 
               case '/' + Constants.navErasmusPaperwork:
                 return PageTransition.makePageTransition(
-                    page: ErasmusPaperworkView(), settings: settings);
+                    page: ErasmusPaperworkModel(), settings: settings);
 
               case '/' + Constants.navErasmusUniversityPage:
                 return PageTransition.makePageTransition(
