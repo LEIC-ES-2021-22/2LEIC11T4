@@ -14,9 +14,9 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.0.1'
+          flutter-version: '2.10.5'
       - run: flutter pub get
-      - run: flutter analyze --no-pub --preamble .
+      - run: flutter analyze lib/view/Pages/Erasmus --no-pub --preamble .
       
   test:
     name: 'Test'
