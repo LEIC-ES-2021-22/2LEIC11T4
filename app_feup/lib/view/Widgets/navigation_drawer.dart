@@ -31,17 +31,6 @@ class NavigationDrawerState extends State<NavigationDrawer> {
       Constants.navErasmusMain: _onSelectPage,
       Constants.navAbout: _onSelectPage,
       Constants.navBugReport: _onSelectPage,
-
-      // Temporary Drawer Pages
-      Constants.navErasmusPaperwork: _onSelectPage,
-      Constants.navErasmusUniversityPage: _onSelectPage,
-      Constants.navErasmusUniversityReview: _onSelectPage,
-      Constants.navErasmusMap: _onSelectPage,
-      Constants.navErasmusStudentsList: _onSelectPage,
-      Constants.navErasmusUniversitiesList: _onSelectPage,
-      Constants.navErasmusMainUni: _onSelectPage,
-      Constants.navErasmusReviewList: _onSelectPage,
-      Constants.navErasmusAbout: _onSelectPage,
     };
   }
 
@@ -129,15 +118,14 @@ class NavigationDrawerState extends State<NavigationDrawer> {
         child: Column(
           children: <Widget>[
             Expanded(
-              child: Container(
-                padding: EdgeInsets.only(top: 55.0),
-                child: ListView(
-                  children: drawerOptions,
-                ),
-              )
-            ),
-        Row(children: <Widget>[Expanded(child: createLogoutBtn())])
-      ],
-    ));
+                child: Container(
+              padding: EdgeInsets.only(top: 55.0),
+              child: ListView(
+                children: drawerOptions,
+              ),
+            )),
+            Row(children: <Widget>[Expanded(child: createLogoutBtn())])
+          ],
+        ));
   }
 }
