@@ -37,7 +37,7 @@ class ErasmusCard extends GenericCard {
       padding: EdgeInsets.fromLTRB(40, 15, 40, 15),
       width: 300,
       margin: EdgeInsets.all(8),
-      color: Colors.grey[200],
+      color: Colors.grey[100],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
