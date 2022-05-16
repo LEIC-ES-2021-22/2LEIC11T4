@@ -1,5 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 
 import '../../Widgets/Erasmus/eramus_nav_card_rows.dart';
@@ -15,8 +16,19 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
   String selectedCourse = 'All';
   String searchUni = '';
 
+  List<String> unis;
+
+  void fetchUnis() async {
+    await ErasmusAPI.fetchUniversities(); // atualizar a API
+    final unisList = await ErasmusDB.getUnis();
+    final set = unisList.map((e) => e.label).toSet();
+    set.add('');
+    unis = set.toList();
+  }
+
   @override
   Widget getBody(BuildContext context) {
+    fetchUnis();
     return ListView(
       key: Key('key_Universities List'),
       children: <Widget>[

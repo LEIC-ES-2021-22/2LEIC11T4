@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:uni/utils/constants.dart' as Constants;
@@ -22,8 +25,18 @@ class ErasmusUniversityPageViewState extends GeneralPageViewState {
   gotoErasmusUniReviewList(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusReviewList);
 
+  // importante deixar aqui como está!!
+  void addUni() async {
+    final unis = await ErasmusDB.getUnis();
+
+    for (int i = 0; i < unis.length; i++) {
+      await ErasmusDB.addUni(unis[i]);
+    }
+  }
+
   @override
   Widget getBody(BuildContext context) {
+    ErasmusAPI.fetchUniversities();
     final MediaQueryData queryData = MediaQuery.of(context);
     return ListView(
       children: <Widget>[
