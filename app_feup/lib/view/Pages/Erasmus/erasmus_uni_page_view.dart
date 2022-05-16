@@ -1,14 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:uni/model/erasmus/UniversityItem.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../model/erasmus/erasmus_api.dart';
 
 class ErasmusUniversityPageView extends StatefulWidget {
   @override
@@ -17,7 +14,7 @@ class ErasmusUniversityPageView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityPageViewState extends GeneralPageViewState {
-  static UniversityItem university = ErasmusAPI.getUniversity(0);
+  static UniversityItem university = ErasmusDB.getUniversity(0);
 
   gotoErasmusUniReviewMake(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview);
@@ -25,18 +22,8 @@ class ErasmusUniversityPageViewState extends GeneralPageViewState {
   gotoErasmusUniReviewList(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusReviewList);
 
-  // importante deixar aqui como está!!
-  void addUni() async {
-    final unis = await ErasmusDB.getUnis();
-
-    for (int i = 0; i < unis.length; i++) {
-      await ErasmusDB.addUni(unis[i]);
-    }
-  }
-
   @override
   Widget getBody(BuildContext context) {
-    ErasmusAPI.fetchUniversities();
     final MediaQueryData queryData = MediaQuery.of(context);
     return ListView(
       children: <Widget>[

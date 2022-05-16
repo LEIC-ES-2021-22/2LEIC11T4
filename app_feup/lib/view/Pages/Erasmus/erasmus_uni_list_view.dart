@@ -4,7 +4,6 @@ import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 
 import '../../Widgets/Erasmus/eramus_nav_card_rows.dart';
-import '../../../model/erasmus/erasmus_api.dart';
 
 class ErasmusUniversityListView extends StatefulWidget {
   @override
@@ -18,9 +17,9 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
 
   List<String> unis;
 
-  void fetchUnis() async {
-    await ErasmusAPI.fetchUniversities(); // atualizar a API
-    final unisList = await ErasmusDB.getUnis();
+  void getUnisInfo() async {
+    await ErasmusDB.fetchData();
+    final unisList = ErasmusDB.getUnis();
     final set = unisList.map((e) => e.label).toSet();
     set.add('');
     unis = set.toList();
@@ -28,7 +27,7 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
 
   @override
   Widget getBody(BuildContext context) {
-    fetchUnis();
+    getUnisInfo();
     return ListView(
       key: Key('key_Universities List'),
       children: <Widget>[
@@ -36,7 +35,7 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: DropdownSearch<dynamic>(
             mode: Mode.MENU,
-            items: ErasmusAPI.getAvailableUniversities(),
+            items: ErasmusDB.getAvailableUniversities(),
             showSearchBox: true,
             onChanged: (value) {
               setState(() {
@@ -55,7 +54,7 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
                   title: Text('Country'),
                   trailing: DropdownButton<String>(
                     hint: Text('Country'),
-                    items: ErasmusAPI.getAvailableCountries()
+                    items: ErasmusDB.getAvailableCountries()
                         .map((e) =>
                             DropdownMenuItem<String>(value: e, child: Text(e)))
                         .toList(),
@@ -71,7 +70,7 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
                   title: Text('Course'),
                   trailing: DropdownButton<String>(
                     hint: Text('Course'),
-                    items: ErasmusAPI.getAvailableCourses()
+                    items: ErasmusDB.getAvailableCourses()
                         .map((e) =>
                             DropdownMenuItem<String>(value: e, child: Text(e)))
                         .toList(),
@@ -86,7 +85,7 @@ class ErasmusUniversityListViewState extends GeneralPageViewState {
               ]),
         ),
         UniversityRows(
-            items: ErasmusAPI.getUniversitiesFromSearch(
+            items: ErasmusDB.getUniversitiesFromSearch(
                 searchUni, selectedCountry, selectedCourse)),
       ],
     );

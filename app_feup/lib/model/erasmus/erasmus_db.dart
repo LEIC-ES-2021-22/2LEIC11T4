@@ -1,7 +1,8 @@
 import 'package:gsheets/gsheets.dart';
-import 'package:uni/model/erasmus/erasmus_api.dart';
+import 'package:uni/model/erasmus/UniversityItem.dart';
+import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 
-const String credentials = r'''
+const String _credentials = r'''
 {
 "type": "service_account",
 "project_id": "erasmus-unite-db",
@@ -16,13 +17,14 @@ const String credentials = r'''
 }
 ''';
 
-const String ssID = '1iSVLb8uXwG8-ke1BJSDHX8q5PLCuVd7VhqWjwu_I8SU';
+const String _ssID = '1iSVLb8uXwG8-ke1BJSDHX8q5PLCuVd7VhqWjwu_I8SU';
 
 class ErasmusDB {
-  static final gsheets = GSheets(credentials);
+  static final _gsheets = GSheets(_credentials);
+  static List<UniversityItem> unis;
 
   static Future<Worksheet> getTable(int sID) async {
-    final ss = await gsheets.spreadsheet(ssID);
+    final ss = await _gsheets.spreadsheet(_ssID);
     final db = ss.worksheetById(sID);
 
     /*
@@ -35,16 +37,27 @@ class ErasmusDB {
     return db;
   }
 
+  static fetchData() async {
+    unis = await _fetchUnis();
+  }
+
   static Future<void> setValue(int sID, int row, int col, String value) async {
     final db = await getTable(sID);
     db.values.insertValue(value, row: row, column: col);
   }
 
-  static Future<List<UniversityItem>> getUnis() async {
+  /*_________________________UNIVERSITIES_________________________*/
+
+  static Future<List<UniversityItem>> _fetchUnis() async {
     final db = await getTable(0);
+
     final values = (await db.values.allRows()).skip(1).toList();
 
     return values.map((value) => UniversityItem.fromSheets(value)).toList();
+  }
+
+  static List<UniversityItem> getUnis() {
+    return unis;
   }
 
   static Future<void> addUni(UniversityItem uni) async {
@@ -70,4 +83,65 @@ class ErasmusDB {
     final db = await getTable(0);
     return db.deleteRow(index + 2);
   }
+
+  //_____________________________UNIS LIST STUFF______________________
+
+  static List<UniversityItem> getUniversitiesFromSearch(
+      String search, String country, String course) {
+    final list = unis;
+
+    if (search.isEmpty && country == 'All' && course == 'All') {
+      return list;
+    }
+    list.removeWhere((element) {
+      return !element.label.contains(search) ||
+          (!element.country.contains(country) && country != 'All') ||
+          (!element.course.contains(course) && course != 'All');
+    });
+
+    return list;
+  }
+
+  static List<String> getAvailableCountries() {
+    final list = unis;
+    final set = list.map((e) => e.country).toSet();
+    set.add('All');
+    return set.toList();
+  }
+
+  static List<String> getAvailableCourses() {
+    final list = unis;
+    final set = list.map((e) => e.course).toSet();
+    set.add('All');
+    return set.toList();
+  }
+
+  static List<String> getAvailableUniversities() {
+    final list = unis;
+    final set = list.map((e) => e.label).toSet();
+    set.add('');
+    return set.toList();
+  }
+
+  static UniversityItem getUniversity(int id) {
+    return unis[id % unis.length];
+  }
+
+  static List<UniversityItem> getTop(int n) {
+    int calcScore(UniversityStarEvaluation score) {
+      return score.country +
+          score.expenses +
+          score.experience +
+          score.knowledge;
+    }
+
+    final unis2 = unis;
+    unis2.sort((a, b) => (calcScore(b.stars)).compareTo(calcScore(a.stars)));
+
+    return unis2.sublist(0, n);
+  }
+
+  /*_________________________REVIEWS_________________________*/
+
+  /*_________________________STUDENTS_________________________*/
 }
