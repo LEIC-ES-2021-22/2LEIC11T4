@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:uni/model/erasmus/UniversityItem.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../model/erasmus/erasmus_api.dart';
 
 class ErasmusUniversityPageView extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class ErasmusUniversityPageView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityPageViewState extends GeneralPageViewState {
-  static UniversityItem university = ErasmusAPI.getUniversity(0);
+  static UniversityItem university = ErasmusDB.getUniversity(0);
 
   gotoErasmusUniReviewMake(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview);
