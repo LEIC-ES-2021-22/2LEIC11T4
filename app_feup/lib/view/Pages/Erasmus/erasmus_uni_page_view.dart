@@ -1,15 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:uni/view/Pages/Erasmus/star_evaluation_view.dart';
-=======
+import 'package:uni/model/erasmus/UniversityItem.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
->>>>>>> b6c1bab2825bc696b15d19474cbca272771db94d
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../model/erasmus/erasmus_api.dart';
 
 class ErasmusUniversityPageView extends StatefulWidget {
   @override
@@ -18,12 +14,7 @@ class ErasmusUniversityPageView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityPageViewState extends GeneralPageViewState {
-<<<<<<< HEAD
-  static UniversityItem university =
-      ErasmusAPI.getUniversity(0);
-=======
-  static UniversityItem university = ErasmusAPI.getUniversity(0);
->>>>>>> b6c1bab2825bc696b15d19474cbca272771db94d
+  static UniversityItem university = ErasmusDB.getUniversity(0);
 
   gotoErasmusUniReviewMake(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview);
@@ -47,46 +38,46 @@ class ErasmusUniversityPageViewState extends GeneralPageViewState {
                 child: Image.network(university.imgUrl)),
             Center(
                 child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(children: <Widget>[
+                  padding: const EdgeInsets.all(10),
+                  child: Column(children: <Widget>[
+                    Text(
+                      university.label + '\n',
+                      textScaleFactor: 1.2,
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      university.country + '\n',
+                      textScaleFactor: 1,
+                    ),
+                    TextLink(
+                      university.rank,
+                      'https://cwur.org/2021-22.php',
+                      preText: 'Ranking: ',
+                    ),
+                  ]),
+                ))
+          ],
+        ),
+        Center(
+            child: Column(
+              children: [
+                TextLink(
+                  university.link,
+                  university.link,
+                  preText: '\nWebsite:  ',
+                  postText: '\n',
+                ),
                 Text(
-                  university.label + '\n',
+                  'Description',
                   textScaleFactor: 1.2,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  university.country + '\n',
-                  textScaleFactor: 1,
-                ),
-                TextLink(
-                  university.rank,
-                  'https://cwur.org/2021-22.php',
-                  preText: 'Ranking: ',
-                ),
-              ]),
-            ))
-          ],
-        ),
-        Center(
-            child: Column(
-          children: [
-            TextLink(
-              university.link,
-              university.link,
-              preText: '\nWebsite:  ',
-              postText: '\n',
-            ),
-            Text(
-              'Description',
-              textScaleFactor: 1.2,
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
-        )),
+              ],
+            )),
         Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
           child: Text(
@@ -101,22 +92,14 @@ class ErasmusUniversityPageViewState extends GeneralPageViewState {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 StarContainer('Expenses', university.stars.expenses, 0),
-<<<<<<< HEAD
-                StarContainer('Experience',  university.stars.experience, 20),
-=======
                 StarContainer('Experience', university.stars.experience, 20),
->>>>>>> b6c1bab2825bc696b15d19474cbca272771db94d
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 StarContainer('Knowledge', university.stars.knowledge, 0),
-<<<<<<< HEAD
-                StarContainer('Country',  university.stars.country, 20),
-=======
                 StarContainer('Country', university.stars.country, 20),
->>>>>>> b6c1bab2825bc696b15d19474cbca272771db94d
               ],
             ),
             Row(
@@ -146,12 +129,12 @@ class TextLink extends StatelessWidget {
   String preText = '';
 
   TextLink(
-    String this.linkText,
-    String this.link, {
-    Key key,
-    String this.preText,
-    String this.postText,
-  }) : super(key: key);
+      String this.linkText,
+      String this.link, {
+        Key key,
+        String this.preText,
+        String this.postText,
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

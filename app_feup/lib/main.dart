@@ -5,20 +5,17 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:redux/redux.dart';
 import 'package:uni/controller/middleware.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/model/erasmus/erasmus_paperwork_model.dart';
 import 'package:uni/model/app_state.dart';
 import 'package:uni/redux/actions.dart';
 import 'package:uni/redux/reducers.dart';
 import 'package:uni/utils/constants.dart' as Constants;
-<<<<<<< HEAD
-import 'package:uni/view/Pages/Erasmus/eramus_about_view.dart';
-import 'package:uni/view/Pages/Erasmus/eramus_map_view.dart';
-import 'package:uni/view/Pages/Erasmus/eramus_page_view.dart';
-=======
+
 import 'package:uni/view/Pages/Erasmus/erasmus_about_view.dart';
 import 'package:uni/view/Pages/Erasmus/erasmus_map_view.dart';
 import 'package:uni/view/Pages/Erasmus/erasmus_page_view.dart';
->>>>>>> b6c1bab2825bc696b15d19474cbca272771db94d
+
 import 'package:uni/view/Pages/Erasmus/erasmus_review_list_view.dart';
 import 'package:uni/view/Pages/Erasmus/erasmus_student_list_view.dart';
 import 'package:uni/view/Pages/Erasmus/erasmus_uni_list_view.dart';
@@ -50,6 +47,8 @@ SentryEvent beforeSend(SentryEvent event) {
 }
 
 Future<void> main() async {
+  await ErasmusDB.fetchData();
+
   OnStartUp.onStart(state);
   await SentryFlutter.init(
     (options) {
