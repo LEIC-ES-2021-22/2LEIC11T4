@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import 'package:uni/view/Pages/Erasmus/star_evaluation_view.dart';
+=======
+import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
+>>>>>>> b6c1bab2825bc696b15d19474cbca272771db94d
 
 class UniversityItem {
   final String label;
@@ -170,4 +174,22 @@ class ErasmusAPI {
     final unis = fetchUniversities();
     return unis[id % unis.length];
   }
+<<<<<<< HEAD
+=======
+
+  static List<UniversityItem> getTop(int n) {
+    final unis = fetchUniversities();
+
+    int calcScore(UniversityStarEvaluation score) {
+      return score.country +
+          score.expenses +
+          score.experience +
+          score.knowledge;
+    }
+
+    unis.sort((a, b) => (calcScore(b.stars)).compareTo(calcScore(a.stars)));
+
+    return unis.sublist(0, n);
+  }
+>>>>>>> b6c1bab2825bc696b15d19474cbca272771db94d
 }
