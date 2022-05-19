@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_new
 
 import 'package:flutter/material.dart';
-import 'package:uni/model/erasmus/UniversityItem.dart';
+import 'package:uni/model/erasmus/universityItem.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 import '../generic_card.dart';

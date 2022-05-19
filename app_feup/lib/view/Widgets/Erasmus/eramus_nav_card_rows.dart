@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uni/model/erasmus/UniversityItem.dart';
+import 'package:uni/model/erasmus/universityItem.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 
 

@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:uni/model/erasmus/UniversityItem.dart';
+import 'package:uni/model/erasmus/universityItem.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 import 'package:uni/view/Pages/general_page_view.dart';

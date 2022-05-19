@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
+import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 
 class ErasmusUniversityReviewView extends StatefulWidget {
@@ -9,6 +11,11 @@ class ErasmusUniversityReviewView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityReviewViewState extends GeneralPageViewState {
+  // chamar funcao para guardar na database a review
+  void postReview(UniversityReview review) async {
+    await ErasmusDB.addReview(review);
+  }
+
   @override
   Widget getBody(BuildContext context) {
     final MediaQueryData queryData = MediaQuery.of(context);
