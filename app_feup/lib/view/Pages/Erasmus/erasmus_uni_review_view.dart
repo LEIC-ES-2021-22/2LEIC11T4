@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:uni/controller/local_storage/app_shared_preferences.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
+import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 
 class ErasmusUniversityReviewView extends StatefulWidget {
   @override
@@ -11,13 +15,21 @@ class ErasmusUniversityReviewView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityReviewViewState extends GeneralPageViewState {
+  int _sNumber = 0;
+
   // chamar funcao para guardar na database a review
   void postReview(UniversityReview review) async {
     await ErasmusDB.addReview(review);
   }
 
+  void getStudentNumber() {
+    _sNumber = ErasmusDB.getStudentNumber();
+  }
+
   @override
   Widget getBody(BuildContext context) {
+    getStudentNumber();
+
     final MediaQueryData queryData = MediaQuery.of(context);
     return ListView(
       children: <Widget>[
@@ -40,7 +52,7 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
               'University Make Review \n\n',
               textScaleFactor: 1.5,
             ),
-            Text('TODO')
+            Text("TODO : $_sNumber")
           ]),
         ))
       ],
