@@ -1,12 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:uni/controller/local_storage/app_shared_preferences.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
-import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 
 class ErasmusUniversityReviewView extends StatefulWidget {
   @override
