@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../model/erasmus/erasmus_api.dart';
+import 'package:uni/model/erasmus/universityItem.dart';
 import '../../Pages/Erasmus/erasmus_uni_page_view.dart';
 import '../generic_card.dart';
 

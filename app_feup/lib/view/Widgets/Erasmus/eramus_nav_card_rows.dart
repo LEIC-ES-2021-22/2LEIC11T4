@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:uni/model/erasmus/universityItem.dart';
 import 'package:uni/utils/constants.dart' as Constants;
-import '../../../model/erasmus/erasmus_api.dart';
+
 
 import 'erasmus_nav_card.dart';
 
