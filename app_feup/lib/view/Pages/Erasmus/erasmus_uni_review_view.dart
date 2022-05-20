@@ -11,13 +11,21 @@ class ErasmusUniversityReviewView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityReviewViewState extends GeneralPageViewState {
+  int _sNumber = 0;
+
   // chamar funcao para guardar na database a review
   void postReview(UniversityReview review) async {
     await ErasmusDB.addReview(review);
   }
 
+  void getStudentNumber() {
+    _sNumber = ErasmusDB.getStudentNumber();
+  }
+
   @override
   Widget getBody(BuildContext context) {
+    getStudentNumber();
+
     final MediaQueryData queryData = MediaQuery.of(context);
     return ListView(
       children: <Widget>[
@@ -40,7 +48,7 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
               'University Make Review \n\n',
               textScaleFactor: 1.5,
             ),
-            Text('TODO')
+            Text("TODO : $_sNumber")
           ]),
         ))
       ],
