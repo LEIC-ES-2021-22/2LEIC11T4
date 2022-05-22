@@ -16,8 +16,10 @@ class ErasmusUniversityPageView extends StatefulWidget {
 class ErasmusUniversityPageViewState extends GeneralPageViewState {
   static UniversityItem university = ErasmusDB.getUniversity(0);
 
-  gotoErasmusUniReviewMake(BuildContext context) =>
-      Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview);
+  gotoErasmusUniReviewMake(BuildContext context) {
+    Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview,
+        arguments: {'uniID' : university.value});
+  }
 
   gotoErasmusUniReviewList(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusReviewList);
