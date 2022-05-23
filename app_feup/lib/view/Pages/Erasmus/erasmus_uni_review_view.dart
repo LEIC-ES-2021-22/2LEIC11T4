@@ -15,17 +15,29 @@ class ErasmusUniversityReviewView extends StatefulWidget {
   State<StatefulWidget> createState() => ErasmusUniversityReviewViewState();
 }
 
+class RatingWraper {
+  int value;
+  String description;
+  IconData icon;
+
+  RatingWraper(int valueRating, String descriptionRating, IconData iconRating) {
+    this.value = valueRating;
+    this.description = descriptionRating;
+    this.icon = iconRating;
+  }
+}
+
 /// Manages the 'about' section of the app.
 class ErasmusUniversityReviewViewState extends GeneralPageViewState {
   static final _formKey = GlobalKey<FormState>();
-  String comment;
-  int expensesValue, experienceValue, knowledgeValue, countryValue;
 
-  final String expensesString = 'Expenses';
-  final String experienceString = 'Experience';
-  final String knowledgeString = 'Knowledge';
-  final String countryString = 'Country Culture';
+  String comment;
   final String commentString = 'Write your comment here';
+
+  RatingWraper expensesWraper = RatingWraper(3, 'Expenses', Icons.euro);
+  RatingWraper experienceWraper = RatingWraper(3, 'Experience', Icons.star);
+  RatingWraper knowledgeWraper = RatingWraper(3, 'Knowledge', Icons.school);
+  RatingWraper countryWraper = RatingWraper(3, 'Country Culture', Icons.public);
 
   // chamar funcao para guardar na database a review
   void postReview(UniversityReview review) async {
@@ -36,165 +48,71 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
     return ErasmusDB.getStudentNumber();
   }
 
+  Widget getRatingForm(RatingWraper ratingWraper) {
+    final MediaQueryData queryData = MediaQuery.of(context);
+
+    return Container(
+      width: queryData.size.width / 2.6,
+      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            ratingWraper.description,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0),
+            child: RatingBar.builder(
+              initialRating: ratingWraper.value.toDouble(),
+              minRating: 1,
+              maxRating: 5,
+              direction: Axis.horizontal,
+              itemCount: 5,
+              itemSize: 25,
+              itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+              itemBuilder: (context, _) => Icon(
+                ratingWraper.icon,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              onRatingUpdate: (rating) {
+                ratingWraper.value = rating.ceil();
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget getReviewForm(BuildContext context) {
     final MediaQueryData queryData = MediaQuery.of(context);
 
     return Form(
       key: _formKey,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      child: Column(children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              width: queryData.size.width / 2.5,
-              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    expensesString,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      maxRating: 5,
-                      direction: Axis.horizontal,
-                      itemCount: 5,
-                      itemSize: 24,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.euro,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      onRatingUpdate: (rating) {
-                        expensesValue = rating.round();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: queryData.size.width / 2.5,
-              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    experienceString,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      maxRating: 5,
-                      direction: Axis.horizontal,
-                      itemCount: 5,
-                      itemSize: 24,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      onRatingUpdate: (rating) {
-                        experienceValue = rating.round();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            getRatingForm(expensesWraper),
+            getRatingForm(experienceWraper),
           ],
         ),
         SizedBox(
-          height: 30,
+          height: 20,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              width: queryData.size.width / 2.5,
-              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    knowledgeString,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      maxRating: 5,
-                      direction: Axis.horizontal,
-                      itemCount: 5,
-                      itemSize: 24,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.school,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      onRatingUpdate: (rating) {
-                        knowledgeValue = rating.round();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: queryData.size.width / 2.5,
-              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    countryString,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      maxRating: 5,
-                      direction: Axis.horizontal,
-                      itemCount: 5,
-                      itemSize: 24,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.public,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      onRatingUpdate: (rating) {
-                        countryValue = rating.round();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            getRatingForm(knowledgeWraper),
+            getRatingForm(countryWraper),
           ],
         ),
         SizedBox(
-          height: 30,
+          height: 20,
         ),
         Container(
           width: queryData.size.width / 1.4,
@@ -206,6 +124,7 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
             minLines: 1,
             maxLines: 5,
             decoration: InputDecoration(
+              helperStyle: TextStyle(color: Colors.black),
               labelText: commentString,
               labelStyle: TextStyle(
                 color: Colors.black,
@@ -242,8 +161,11 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
                     uniID: arguments['uniID'],
                     studentID: getStudentNumber().toString(),
                     text: comment,
-                    stars: UniversityStarEvaluation(expensesValue,
-                        experienceValue, knowledgeValue, countryValue));
+                    stars: UniversityStarEvaluation(
+                        expensesWraper.value,
+                        experienceWraper.value,
+                        knowledgeWraper.value,
+                        countryWraper.value));
                 postReview(review);
               }
             },
