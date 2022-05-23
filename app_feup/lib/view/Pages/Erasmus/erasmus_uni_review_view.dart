@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
@@ -24,7 +24,7 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
   final String expensesString = 'Expenses';
   final String experienceString = 'Experience';
   final String knowledgeString = 'Knowledge';
-  final String cultureString = 'Country Culture';
+  final String countryString = 'Country Culture';
   final String commentString = 'Write your comment here';
 
   // chamar funcao para guardar na database a review
@@ -46,60 +46,72 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
           children: [
             Container(
               width: queryData.size.width / 2.5,
-              child: TextFormField(
-                onSaved: (String value) {
-                  expensesValue = int.parse(value);
-                },
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                maxLength: 1,
-                decoration: InputDecoration(
-                  labelText: expensesString,
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
+              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    expensesString,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
-                  icon: Icon(Icons.money),
-                ),
-                validator: (value) {
-                  if (value.isEmpty) return 'Please fill this field';
-                  int intValue = int.parse(value);
-                  if (intValue < 1 && intValue > 5) {
-                    return 'Number must be from 1 to 5';
-                  }
-                  return null;
-                },
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: RatingBar.builder(
+                      initialRating: 3,
+                      minRating: 1,
+                      maxRating: 5,
+                      direction: Axis.horizontal,
+                      itemCount: 5,
+                      itemSize: 24,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.euro,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      onRatingUpdate: (rating) {
+                        expensesValue = rating.round();
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               width: queryData.size.width / 2.5,
-              child: TextFormField(
-                onSaved: (String value) {
-                  experienceValue = int.parse(value);
-                },
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                maxLength: 1,
-                decoration: InputDecoration(
-                  labelText: experienceString,
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
+              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    experienceString,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
-                  icon: Icon(Icons.star),
-                ),
-                validator: (value) {
-                  if (value.isEmpty) return 'Please fill this field';
-                  int intValue = int.parse(value);
-                  if (intValue < 1 && intValue > 5) {
-                    return 'Number must be from 1 to 5';
-                  }
-                  return null;
-                },
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: RatingBar.builder(
+                      initialRating: 3,
+                      minRating: 1,
+                      maxRating: 5,
+                      direction: Axis.horizontal,
+                      itemCount: 5,
+                      itemSize: 24,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      onRatingUpdate: (rating) {
+                        experienceValue = rating.round();
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -111,60 +123,72 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
           children: [
             Container(
               width: queryData.size.width / 2.5,
-              child: TextFormField(
-                onSaved: (String value) {
-                  knowledgeValue = int.parse(value);
-                },
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                maxLength: 1,
-                decoration: InputDecoration(
-                  labelText: knowledgeString,
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
+              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    knowledgeString,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
-                  icon: Icon(Icons.school),
-                ),
-                validator: (value) {
-                  if (value.isEmpty) return 'Please fill this field';
-                  int intValue = int.parse(value);
-                  if (intValue < 1 && intValue > 5) {
-                    return 'Number must be from 1 to 5';
-                  }
-                  return null;
-                },
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: RatingBar.builder(
+                      initialRating: 3,
+                      minRating: 1,
+                      maxRating: 5,
+                      direction: Axis.horizontal,
+                      itemCount: 5,
+                      itemSize: 24,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.school,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      onRatingUpdate: (rating) {
+                        knowledgeValue = rating.round();
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               width: queryData.size.width / 2.5,
-              child: TextFormField(
-                onSaved: (String value) {
-                  countryValue = int.parse(value);
-                },
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                maxLength: 1,
-                decoration: InputDecoration(
-                  labelText: cultureString,
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
+              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    countryString,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
-                  icon: Icon(Icons.public),
-                ),
-                validator: (value) {
-                  if (value.isEmpty) return 'Please fill this field';
-                  int intValue = int.parse(value);
-                  if (intValue < 1 && intValue > 5) {
-                    return 'Number must be from 1 to 5';
-                  }
-                  return null;
-                },
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: RatingBar.builder(
+                      initialRating: 3,
+                      minRating: 1,
+                      maxRating: 5,
+                      direction: Axis.horizontal,
+                      itemCount: 5,
+                      itemSize: 24,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.public,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      onRatingUpdate: (rating) {
+                        countryValue = rating.round();
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -221,7 +245,6 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
                     stars: UniversityStarEvaluation(expensesValue,
                         experienceValue, knowledgeValue, countryValue));
                 postReview(review);
-                
               }
             },
             child: Padding(
