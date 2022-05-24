@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:location/location.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -31,38 +32,19 @@ class ErasmusMapViewState extends GeneralPageViewState {
   }
   Set<Marker> getmarkers() { //markers to place on map
     setState(() {
-      markers.add(Marker( //add first marker
-        markerId: MarkerId(showLocation.toString()),
-        position: showLocation, //position of marker
-        infoWindow: InfoWindow( //popup info
-          title: 'Marker Title First ',
-          snippet: 'My Custom Subtitle',
-        ),
-        icon: BitmapDescriptor.defaultMarker, //Icon for Marker
-      ));
-
-      markers.add(Marker( //add second marker
-        markerId: MarkerId(showLocation.toString()),
-        position: LatLng(29.7099116, 89.3132343), //position of marker
-        infoWindow: InfoWindow( //popup info
-          title: 'Marker Title Second ',
-          snippet: 'My Custom Subtitle',
-        ),
-        icon: BitmapDescriptor.defaultMarker, //Icon for Marker
-      ));
-
-      markers.add(Marker( //add third marker
-        markerId: MarkerId(showLocation.toString()),
-        position: LatLng(27.7137735, 85.315626), //position of marker
-        infoWindow: InfoWindow( //popup info
-          title: 'Marker Title Third ',
-          snippet: 'My Custom Subtitle',
-        ),
-        icon: BitmapDescriptor.defaultMarker, //Icon for Marker
-      ));
-
-      //add more markers here
+      ErasmusDB.getUnis().forEach((element) {
+        markers.add(Marker( //add first marker
+          markerId: MarkerId(element.location.toString()),
+          position: element.location, //position of marker
+          infoWindow: InfoWindow( //popup info
+            title: element.label,
+            snippet: element.course,
+          ),
+          icon: BitmapDescriptor.defaultMarker, //Icon for Marker
+        ));
+      });
     });
+
 
     return markers;
   }
@@ -84,10 +66,6 @@ class ErasmusMapViewState extends GeneralPageViewState {
   @override
   Widget getBody(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
-        ),
         body: _center == null? Center(child:CircularProgressIndicator()):
         GoogleMap(
           onMapCreated: _onMapCreated,
