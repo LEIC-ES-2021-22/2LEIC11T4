@@ -8,7 +8,6 @@ import 'package:uni/utils/constants.dart' as Constants;
 
 import 'erasmus_uni_page_view.dart';
 
-
 class ErasmusMapView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ErasmusMapViewState();
@@ -35,7 +34,6 @@ class ErasmusMapViewState extends GeneralPageViewState {
     });
   }
   Set<Marker> getmarkers() { //markers to place on map
-
     setState(() {
       ErasmusDB.getUnis().forEach((element) {
         markers.add(Marker( //add first marker
