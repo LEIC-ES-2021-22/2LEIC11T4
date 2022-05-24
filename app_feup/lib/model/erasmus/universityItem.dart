@@ -10,7 +10,6 @@ class UniversityItem {
   final String imgUrl;
   final String description;
   final UniversityStarEvaluation stars;
-  // the stars should come from the mean of the db
   dynamic value;
 
   factory UniversityItem.fromSheets(List<String> input) => UniversityItem(

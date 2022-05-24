@@ -56,10 +56,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   material_design_icons_flutter: ^5.0.6595
   gsheets: ^0.4.2
+
   dio: ^4.0.0
   location: ^4.3.0
   flutter_polyline_points: ^0.2.6
   google_maps_flutter: ^2.1.5
+
+  flutter_rating_bar: ^4.0.1
+
 
 
 dev_dependencies:
