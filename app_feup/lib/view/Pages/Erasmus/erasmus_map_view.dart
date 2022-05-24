@@ -4,6 +4,9 @@ import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:location/location.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:uni/utils/constants.dart' as Constants;
+
+import 'erasmus_uni_page_view.dart';
 
 class ErasmusMapView extends StatefulWidget {
   @override
@@ -40,6 +43,10 @@ class ErasmusMapViewState extends GeneralPageViewState {
             title: element.label,
             snippet: element.course,
           ),
+          onTap: () => {
+            ErasmusUniversityPageViewState.university = element,
+            Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityPage)
+          },
           icon: BitmapDescriptor.defaultMarker, //Icon for Marker
         ));
       });
