@@ -4,7 +4,6 @@ import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:location/location.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-
 class ErasmusMapView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ErasmusMapViewState();
