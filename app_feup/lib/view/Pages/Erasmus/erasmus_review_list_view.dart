@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
+import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 
 class ErasmusReviewListView extends StatefulWidget {
@@ -9,8 +11,16 @@ class ErasmusReviewListView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusReviewListViewState extends GeneralPageViewState {
+  List<UniversityReview> reviews; // estao aqui as reviews vindas da db
+
+  void getReviews() async {
+    await ErasmusDB.fetchData();
+    reviews = ErasmusDB.getReviews();
+  }
+
   @override
   Widget getBody(BuildContext context) {
+    getReviews();
     final MediaQueryData queryData = MediaQuery.of(context);
     return ListView(
       children: <Widget>[

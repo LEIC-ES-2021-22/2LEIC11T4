@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:uni/model/erasmus/UniversityItem.dart';
+import 'package:uni/model/erasmus/universityItem.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
@@ -16,8 +16,10 @@ class ErasmusUniversityPageView extends StatefulWidget {
 class ErasmusUniversityPageViewState extends GeneralPageViewState {
   static UniversityItem university = ErasmusDB.getUniversity(0);
 
-  gotoErasmusUniReviewMake(BuildContext context) =>
-      Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview);
+  gotoErasmusUniReviewMake(BuildContext context) {
+    Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview,
+        arguments: {'uniID' : university.value});
+  }
 
   gotoErasmusUniReviewList(BuildContext context) =>
       Navigator.pushNamed(context, '/' + Constants.navErasmusReviewList);

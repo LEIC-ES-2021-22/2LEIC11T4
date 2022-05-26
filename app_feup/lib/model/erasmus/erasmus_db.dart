@@ -1,5 +1,7 @@
 import 'package:gsheets/gsheets.dart';
-import 'package:uni/model/erasmus/UniversityItem.dart';
+import 'package:uni/controller/local_storage/app_shared_preferences.dart';
+import 'package:uni/model/erasmus/universityItem.dart';
+import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 
 const String _credentials = r'''
@@ -21,24 +23,19 @@ const String _ssID = '1iSVLb8uXwG8-ke1BJSDHX8q5PLCuVd7VhqWjwu_I8SU';
 
 class ErasmusDB {
   static final _gsheets = GSheets(_credentials);
-  static List<UniversityItem> unis;
+  static int _sNumber;
+  static List<UniversityItem> _unis;
+  static List<UniversityReview> _reviews;
 
   static Future<Worksheet> getTable(int sID) async {
     final ss = await _gsheets.spreadsheet(_ssID);
     final db = ss.worksheetById(sID);
-
-    /*
-    // get worksheet by its title
-    var sheet2 = ss.worksheetByTitle('example');
-    // create worksheet if it does not exist yet
-    sheet2 ??= await ss.addWorksheet('example');
-    */
-
     return db;
   }
 
   static fetchData() async {
-    unis = await _fetchUnis();
+    _unis = await _fetchUnis();
+    _reviews = await _fetchReviews();
   }
 
   static Future<void> setValue(int sID, int row, int col, String value) async {
@@ -57,7 +54,7 @@ class ErasmusDB {
   }
 
   static List<UniversityItem> getUnis() {
-    return unis;
+    return _unis;
   }
 
   static Future<void> addUni(UniversityItem uni) async {
@@ -88,7 +85,7 @@ class ErasmusDB {
 
   static List<UniversityItem> getUniversitiesFromSearch(
       String search, String country, String course) {
-    final list = unis;
+    final list = _unis;
 
     if (search.isEmpty && country == 'All' && course == 'All') {
       return list;
@@ -103,28 +100,28 @@ class ErasmusDB {
   }
 
   static List<String> getAvailableCountries() {
-    final list = unis;
+    final list = _unis;
     final set = list.map((e) => e.country).toSet();
     set.add('All');
     return set.toList();
   }
 
   static List<String> getAvailableCourses() {
-    final list = unis;
+    final list = _unis;
     final set = list.map((e) => e.course).toSet();
     set.add('All');
     return set.toList();
   }
 
   static List<String> getAvailableUniversities() {
-    final list = unis;
+    final list = _unis;
     final set = list.map((e) => e.label).toSet();
     set.add('');
     return set.toList();
   }
 
   static UniversityItem getUniversity(int id) {
-    return unis[id % unis.length];
+    return _unis[id % _unis.length];
   }
 
   static List<UniversityItem> getTop(int n) {
@@ -135,13 +132,54 @@ class ErasmusDB {
           score.knowledge;
     }
 
-    final unis2 = unis;
+    final unis2 = _unis;
     unis2.sort((a, b) => (calcScore(b.stars)).compareTo(calcScore(a.stars)));
 
     return unis2.sublist(0, n);
   }
 
   /*_________________________REVIEWS_________________________*/
+
+  static Future<List<UniversityReview>> _fetchReviews() async {
+    final db = await getTable(6996890);
+
+    final values = (await db.values.allRows()).skip(1).toList();
+
+    return values.map((value) => UniversityReview.fromSheets(value)).toList();
+  }
+
+  static List<UniversityReview> getReviews() {
+    return _reviews;
+  }
+
+  static Future<void> addReview(UniversityReview review) async {
+    final db = await getTable(6996890);
+    db.values.appendRow([
+      review.uniID,
+      review.studentID,
+      review.stars.country,
+      review.stars.expenses,
+      review.stars.experience,
+      review.stars.knowledge,
+      review.text
+    ]);
+  }
+
+  static Future<bool> deleteReview(int index) async {
+    final db = await getTable(6996890);
+    return db.deleteRow(index + 2);
+  }
+
+  static fetchStudentInfo() async {
+    String student = await AppSharedPreferences.getUserNumber();
+    student = student.substring(2);
+    _sNumber = int.parse(student);
+  }
+
+  static int getStudentNumber() {
+    fetchStudentInfo();
+    return _sNumber;
+  }
 
   /*_________________________STUDENTS_________________________*/
 }

@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 
 class UniversityItem {
@@ -9,8 +10,8 @@ class UniversityItem {
   final String link;
   final String imgUrl;
   final String description;
+  final LatLng location;
   final UniversityStarEvaluation stars;
-  // the stars should come from the mean of the db
   dynamic value;
 
   factory UniversityItem.fromSheets(List<String> input) => UniversityItem(
@@ -25,6 +26,7 @@ class UniversityItem {
         stars: UniversityStarEvaluation(int.parse(input[8]),
             int.parse(input[9]), int.parse(input[10]), int.parse(input[11])),
         imgUrl: input[12],
+        location: LatLng(double.parse(input[13]), double.parse(input[14]))
       );
 
   UniversityItem(
@@ -37,7 +39,8 @@ class UniversityItem {
       this.course,
       this.imgUrl,
       this.description,
-      this.stars});
+      this.stars,
+      this.location});
 
   factory UniversityItem.fromJson(Map<String, dynamic> json) {
     return UniversityItem(

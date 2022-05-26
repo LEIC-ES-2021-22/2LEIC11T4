@@ -57,6 +57,14 @@ dependencies:
   material_design_icons_flutter: ^5.0.6595
   gsheets: ^0.4.2
 
+  dio: ^4.0.0
+  location: ^4.3.0
+  flutter_polyline_points: ^0.2.6
+  google_maps_flutter: ^2.1.5
+
+  flutter_rating_bar: ^4.0.1
+
+
 
 dev_dependencies:
   flutter_test:
@@ -117,6 +125,7 @@ flutter:
     - assets/images/
     - assets/env/
     - assets/text/
+    - assets/map_style.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
