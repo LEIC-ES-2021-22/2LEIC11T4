@@ -132,6 +132,7 @@ class _ErasmusPaperworkModelState extends SecondaryPageViewState
                       'https://sigarra.up.pt/feup/pt/web_base.gera_pagina?P_pagina=1656')),
             TextSpan(
                 text:
+
                 '   Before you submit your application, you must get approval '
                     'from the',
                 style: TextStyle(color: Colors.black)),

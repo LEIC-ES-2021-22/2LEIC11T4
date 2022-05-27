@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/model/erasmus/universityReview.dart';
@@ -27,6 +28,7 @@ class RatingWraper {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityReviewViewState extends GeneralPageViewState {
+
   static final _formKey = GlobalKey<FormState>();
 
   String comment;
@@ -37,10 +39,12 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
   RatingWraper knowledgeWraper = RatingWraper(3, 'Knowledge', Icons.school);
   RatingWraper countryWraper = RatingWraper(3, 'Country Culture', Icons.public);
 
+
   // chamar funcao para guardar na database a review
   void postReview(UniversityReview review) async {
     await ErasmusDB.addReview(review);
   }
+
 
   int getStudentNumber() {
     return ErasmusDB.getStudentNumber();
@@ -177,6 +181,7 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
       ]),
     );
   }
+
 
   @override
   Widget getBody(BuildContext context) {

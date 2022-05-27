@@ -7,7 +7,9 @@ class UniversityStarEvaluation {
   final int country;
 
   UniversityStarEvaluation(
+
     this.country, this.expenses, this.experience, this.knowledge);
+
 }
 
 class StarContainer extends StatelessWidget {

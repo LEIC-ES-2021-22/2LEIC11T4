@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_svg/svg.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
@@ -8,6 +11,7 @@ import 'package:uni/utils/constants.dart' as Constants;
 
 import 'erasmus_uni_page_view.dart';
 
+
 class ErasmusMapView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ErasmusMapViewState();
@@ -15,6 +19,7 @@ class ErasmusMapView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusMapViewState extends GeneralPageViewState {
+
   // late
   GoogleMapController mapController;
   final Set<Marker> markers = Set();
