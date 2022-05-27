@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
-
 
 class ErasmusUniversityReviewView extends StatefulWidget {
   const ErasmusUniversityReviewView({Key key}) : super(key: key);

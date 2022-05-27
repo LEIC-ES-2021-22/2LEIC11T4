@@ -1,5 +1,6 @@
 import 'package:gsheets/gsheets.dart';
 import 'package:uni/controller/local_storage/app_shared_preferences.dart';
+
 import 'package:uni/model/erasmus/universityItem.dart';
 import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
@@ -24,6 +25,7 @@ const String _ssID = '1iSVLb8uXwG8-ke1BJSDHX8q5PLCuVd7VhqWjwu_I8SU';
 class ErasmusDB {
   static final _gsheets = GSheets(_credentials);
   static int _sNumber;
+
   static List<UniversityItem> _unis;
   static List<UniversityReview> _reviews;
 

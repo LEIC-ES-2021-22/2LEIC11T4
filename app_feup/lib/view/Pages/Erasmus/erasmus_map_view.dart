@@ -24,7 +24,7 @@ class ErasmusMapViewState extends GeneralPageViewState {
   String _mapStyle;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     setState(() {
       getLocation();
@@ -33,25 +33,29 @@ class ErasmusMapViewState extends GeneralPageViewState {
       _mapStyle = string;
     });
   }
-  Set<Marker> getmarkers() { //markers to place on map
+
+  Set<Marker> getmarkers() {
+    //markers to place on map
     setState(() {
       ErasmusDB.getUnis().forEach((element) {
-        markers.add(Marker( //add first marker
+        markers.add(Marker(
+          //add first marker
           markerId: MarkerId(element.location.toString()),
           position: element.location, //position of marker
-          infoWindow: InfoWindow( //popup info
+          infoWindow: InfoWindow(
+            //popup info
             title: element.label,
             snippet: element.course,
           ),
           onTap: () => {
             ErasmusUniversityPageViewState.university = element,
-            Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityPage)
+            Navigator.pushNamed(
+                context, '/' + Constants.navErasmusUniversityPage)
           },
           icon: BitmapDescriptor.defaultMarker, //Icon for Marker
         ));
       });
     });
-
 
     return markers;
   }
@@ -69,35 +73,34 @@ class ErasmusMapViewState extends GeneralPageViewState {
     mapController.setMapStyle(_mapStyle);
   }
 
-
   @override
   Widget getBody(BuildContext context) {
     return Scaffold(
-        body: _center == null? Center(child:CircularProgressIndicator()):
-        GoogleMap(
-          onMapCreated: _onMapCreated,
-          markers: getmarkers(),
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 11.0,
-          ),
-        ),
-      );
+      body: _center == null
+          ? Center(child: CircularProgressIndicator())
+          : GoogleMap(
+              onMapCreated: _onMapCreated,
+              markers: getmarkers(),
+              initialCameraPosition: CameraPosition(
+                target: _center,
+                zoom: 11.0,
+              ),
+            ),
+    );
   }
 
-  void getLocation() async{
-    var loc= await currentLocation.getLocation();
-    mapController?.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: LatLng(loc.latitude ?? 0.0,loc.longitude?? 0.0),
-          zoom: 12.0,
-        )));
-    _center  = LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
+  void getLocation() async {
+    var loc = await currentLocation.getLocation();
+    mapController?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
+      zoom: 12.0,
+    )));
+    _center = LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
     showLocation = LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
     setState(() {
-      markers.add(Marker(markerId: MarkerId('Home'),
-          position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0)
-      ));
+      markers.add(Marker(
+          markerId: MarkerId('Home'),
+          position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0)));
     });
   }
 }
