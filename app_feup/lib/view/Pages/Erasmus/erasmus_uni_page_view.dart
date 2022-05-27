@@ -18,7 +18,7 @@ class ErasmusUniversityPageViewState extends GeneralPageViewState {
 
   gotoErasmusUniReviewMake(BuildContext context) {
     Navigator.pushNamed(context, '/' + Constants.navErasmusUniversityReview,
-        arguments: {'uniID' : university.value});
+        arguments: {'uniID': university.value});
   }
 
   gotoErasmusUniReviewList(BuildContext context) =>
@@ -40,46 +40,46 @@ class ErasmusUniversityPageViewState extends GeneralPageViewState {
                 child: Image.network(university.imgUrl)),
             Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(children: <Widget>[
-                    Text(
-                      university.label + '\n',
-                      textScaleFactor: 1.2,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      university.country + '\n',
-                      textScaleFactor: 1,
-                    ),
-                    TextLink(
-                      university.rank,
-                      'https://cwur.org/2021-22.php',
-                      preText: 'Ranking: ',
-                    ),
-                  ]),
-                ))
-          ],
-        ),
-        Center(
-            child: Column(
-              children: [
-                TextLink(
-                  university.link,
-                  university.link,
-                  preText: '\nWebsite:  ',
-                  postText: '\n',
-                ),
+              padding: const EdgeInsets.all(10),
+              child: Column(children: <Widget>[
                 Text(
-                  'Description',
+                  university.label + '\n',
                   textScaleFactor: 1.2,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.bold),
                 ),
-              ],
-            )),
+                Text(
+                  university.country + '\n',
+                  textScaleFactor: 1,
+                ),
+                TextLink(
+                  university.rank,
+                  'https://cwur.org/2021-22.php',
+                  preText: 'Ranking: ',
+                ),
+              ]),
+            ))
+          ],
+        ),
+        Center(
+            child: Column(
+          children: [
+            TextLink(
+              university.link,
+              university.link,
+              preText: '\nWebsite:  ',
+              postText: '\n',
+            ),
+            Text(
+              'Description',
+              textScaleFactor: 1.2,
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        )),
         Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
           child: Text(
@@ -131,12 +131,12 @@ class TextLink extends StatelessWidget {
   String preText = '';
 
   TextLink(
-      String this.linkText,
-      String this.link, {
-        Key key,
-        String this.preText,
-        String this.postText,
-      }) : super(key: key);
+    String this.linkText,
+    String this.link, {
+    Key key,
+    String this.preText,
+    String this.postText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

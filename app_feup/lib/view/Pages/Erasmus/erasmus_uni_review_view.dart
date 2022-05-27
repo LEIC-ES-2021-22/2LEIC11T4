@@ -6,7 +6,6 @@ import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 
-
 class ErasmusUniversityReviewView extends StatefulWidget {
   const ErasmusUniversityReviewView({Key key}) : super(key: key);
 
@@ -28,7 +27,6 @@ class RatingWraper {
 
 /// Manages the 'about' section of the app.
 class ErasmusUniversityReviewViewState extends GeneralPageViewState {
-
   static final _formKey = GlobalKey<FormState>();
 
   String comment;
@@ -39,12 +37,10 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
   RatingWraper knowledgeWraper = RatingWraper(3, 'Knowledge', Icons.school);
   RatingWraper countryWraper = RatingWraper(3, 'Country Culture', Icons.public);
 
-
   // chamar funcao para guardar na database a review
   void postReview(UniversityReview review) async {
     await ErasmusDB.addReview(review);
   }
-
 
   int getStudentNumber() {
     return ErasmusDB.getStudentNumber();
@@ -181,7 +177,6 @@ class ErasmusUniversityReviewViewState extends GeneralPageViewState {
       ]),
     );
   }
-
 
   @override
   Widget getBody(BuildContext context) {

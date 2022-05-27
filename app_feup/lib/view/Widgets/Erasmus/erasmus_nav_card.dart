@@ -9,7 +9,6 @@ import '../../../model/erasmus/universityReview.dart';
 import '../../Pages/Erasmus/erasmus_uni_page_view.dart';
 import '../generic_card.dart';
 
-
 class ErasmusNavigationCard extends GenericCard {
   final String title;
   final String text;
@@ -91,7 +90,6 @@ class ErasmusUniversityCard extends GenericCard {
   }
 }
 
-
 class ErasmusReviewCard extends GenericCard {
   final UniversityReview review;
   final gotoPage;
@@ -112,8 +110,11 @@ class ErasmusReviewCard extends GenericCard {
       Container(
           width: queryData.size.height / 7,
           height: queryData.size.height / 7,
-          child: Image.network('https://sigarra.up.pt/feup/pt/fotografias_service.foto?pct_cod='
-              + review.studentID, headers: headers,)),
+          child: Image.network(
+            'https://sigarra.up.pt/feup/pt/fotografias_service.foto?pct_cod=' +
+                review.studentID,
+            headers: headers,
+          )),
       SizedBox(width: 30),
       Expanded(
         child: Column(
@@ -121,9 +122,13 @@ class ErasmusReviewCard extends GenericCard {
             Text(review.text,
                 softWrap: true, style: Theme.of(context).textTheme.headline2),
             SizedBox(height: 10),
-
-            StarDisplay(value: ((review.stars.experience + review.stars.expenses
-                + review.stars.country + review.stars.knowledge)/4).round()),
+            StarDisplay(
+                value: ((review.stars.experience +
+                            review.stars.expenses +
+                            review.stars.country +
+                            review.stars.knowledge) /
+                        4)
+                    .round()),
             SizedBox(height: 5)
           ],
         ),
@@ -135,7 +140,5 @@ class ErasmusReviewCard extends GenericCard {
   String getTitle() => this.review.studentID;
 
   @override
-  onClick(BuildContext context) {
-  }
-
+  onClick(BuildContext context) {}
 }
