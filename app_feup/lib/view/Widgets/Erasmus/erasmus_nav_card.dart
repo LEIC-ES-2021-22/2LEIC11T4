@@ -5,6 +5,7 @@ import 'package:uni/model/app_state.dart';
 import 'package:uni/model/erasmus/universityItem.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 import '../../../model/erasmus/universityReview.dart';
+
 import '../../Pages/Erasmus/erasmus_uni_page_view.dart';
 import '../generic_card.dart';
 

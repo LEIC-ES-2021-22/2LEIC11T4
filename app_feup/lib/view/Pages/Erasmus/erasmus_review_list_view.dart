@@ -17,6 +17,7 @@ class ErasmusReviewListView extends StatefulWidget {
 
 class ErasmusReviewListViewState extends GeneralPageViewState {
 
+
   List<UniversityReview> reviews;
 
   void getReviews(){
