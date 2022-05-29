@@ -23,20 +23,6 @@ const String _credentials = r'''
 
 const String _ssID = '1iSVLb8uXwG8-ke1BJSDHX8q5PLCuVd7VhqWjwu_I8SU';
 
-final List<String> languages = [
-  'Portuguese',
-  'German',
-  'English',
-  'French',
-  'Greek',
-  'Spanish',
-  'Romenian',
-  'Estonian',
-  'Finish',
-  'Russian',
-  'Ukranian'
-];
-
 class ErasmusDB {
   static final _gsheets = GSheets(_credentials);
   static int _sNumber;
@@ -44,7 +30,20 @@ class ErasmusDB {
   static List<UniversityItem> _unis;
   static List<UniversityReview> _reviews;
   static List<StudentItem> _students;
-  static bool inDBstudentID;
+
+  static List<String> languages = [
+    'Portuguese',
+    'German',
+    'English',
+    'French',
+    'Greek',
+    'Spanish',
+    'Romenian',
+    'Estonian',
+    'Finish',
+    'Russian',
+    'Ukranian'
+  ];
 
   static Future<Worksheet> getTable(int sID) async {
     final ss = await _gsheets.spreadsheet(_ssID);

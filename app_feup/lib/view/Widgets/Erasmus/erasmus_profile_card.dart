@@ -10,7 +10,7 @@ class ErasmusProfileCard extends StatefulWidget {
 }
 
 class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
-  bool isErasmusStudent = (ErasmusDB.inDBstudentID == null) ? false : true;
+  bool isErasmusStudent = false;
   bool isOutgoing = true;
   int selectedValue = 0;
   bool inDb = false;
@@ -111,7 +111,6 @@ class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
         inDb = true;
         ErasmusDB.addStudent(StudentItem(null, getStudentNumber(),
             '${isOutgoing ? 1 : 0}', '$selectedValue'));
-        ErasmusDB.inDBstudentID = true;
         updateSID();
       }
       isErasmusStudent = !isErasmusStudent;
@@ -165,13 +164,11 @@ class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
   }
 
   Widget myDropDownButton(BuildContext context) {
-    //Maybe fetch from db instead of hardcode
-
     return DropdownButton(
         value: selectedValue,
-        items: List.generate(languages.length, (index) {
+        items: List.generate(ErasmusDB.languages.length, (index) {
           return DropdownMenuItem(
-            child: Text(languages[index]),
+            child: Text(ErasmusDB.languages[index]),
             value: index,
           );
         }),
