@@ -44,6 +44,7 @@ class ErasmusDB {
   static List<UniversityItem> _unis;
   static List<UniversityReview> _reviews;
   static List<StudentItem> _students;
+  static bool inDBstudentID;
 
   static Future<Worksheet> getTable(int sID) async {
     final ss = await _gsheets.spreadsheet(_ssID);
@@ -231,6 +232,11 @@ class ErasmusDB {
   }
 
   static void setStudentValue(int row, int col, String val) {
-    setValue(1452015207, row + 1, col, val);
+    setValue(1452015207, row + 2, col, val);
+  }
+
+  static Future<int> getNewStudentID() async {
+    final db = await getTable(1452015207);
+    return int.parse((await db.values.lastRow(fromColumn: 1))[0]) + 1;
   }
 }

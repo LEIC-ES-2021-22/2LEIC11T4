@@ -10,18 +10,25 @@ class ErasmusProfileCard extends StatefulWidget {
 }
 
 class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
-  bool isErasmusStudent = true;
+  bool isErasmusStudent = (ErasmusDB.inDBstudentID == null) ? false : true;
   bool isOutgoing = true;
   int selectedValue = 0;
   bool inDb = false;
-  int sID = 8;
+  int sID = 0;
+  bool isInitialization = true;
 
   String getStudentNumber() {
     return ErasmusDB.getStudentNumber().toString();
   }
 
+  void updateSID() async {
+    sID = await ErasmusDB.getNewStudentID();
+    await ErasmusDB.fetchStudents();
+    setValuesIfInDB();
+  }
+
   void setValuesIfInDB() {
-    ErasmusDB.fetchStudents();
+    isInitialization = false;
     List<StudentItem> students = ErasmusDB.getStudents();
 
     students = students
@@ -40,7 +47,7 @@ class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
 
   @override
   Widget build(BuildContext context) {
-    //setValuesIfInDB();
+    if (isInitialization) setValuesIfInDB();
     return Card(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         color: Color.fromARGB(0, 0, 0, 0),
@@ -98,11 +105,14 @@ class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
   }
 
   void checkBoxChange(bool boolean) {
+    if (isErasmusStudent) return;
     setState(() {
       if (!isErasmusStudent && !inDb) {
         inDb = true;
         ErasmusDB.addStudent(StudentItem(null, getStudentNumber(),
             '${isOutgoing ? 1 : 0}', '$selectedValue'));
+        ErasmusDB.inDBstudentID = true;
+        updateSID();
       }
       isErasmusStudent = !isErasmusStudent;
       if (!isErasmusStudent) {
