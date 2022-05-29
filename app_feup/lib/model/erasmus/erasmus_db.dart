@@ -1,5 +1,6 @@
 import 'package:gsheets/gsheets.dart';
 import 'package:uni/controller/local_storage/app_shared_preferences.dart';
+import 'package:uni/model/erasmus/studentItem.dart';
 
 import 'package:uni/model/erasmus/universityItem.dart';
 import 'package:uni/model/erasmus/universityReview.dart';
@@ -22,12 +23,27 @@ const String _credentials = r'''
 
 const String _ssID = '1iSVLb8uXwG8-ke1BJSDHX8q5PLCuVd7VhqWjwu_I8SU';
 
+final List<String> languages = [
+  'Portuguese',
+  'German',
+  'English',
+  'French',
+  'Greek',
+  'Spanish',
+  'Romenian',
+  'Estonian',
+  'Finish',
+  'Russian',
+  'Ukranian'
+];
+
 class ErasmusDB {
   static final _gsheets = GSheets(_credentials);
   static int _sNumber;
 
   static List<UniversityItem> _unis;
   static List<UniversityReview> _reviews;
+  static List<StudentItem> _students;
 
   static Future<Worksheet> getTable(int sID) async {
     final ss = await _gsheets.spreadsheet(_ssID);
@@ -38,6 +54,7 @@ class ErasmusDB {
   static fetchData() async {
     _unis = await _fetchUnis();
     _reviews = await _fetchReviews();
+    _students = await fetchStudents();
   }
 
   static Future<void> setValue(int sID, int row, int col, String value) async {
@@ -184,4 +201,36 @@ class ErasmusDB {
   }
 
   /*_________________________STUDENTS_________________________*/
+
+  static Future<List<StudentItem>> fetchStudents() async {
+    final db = await getTable(1452015207);
+
+    final values = (await db.values.allRows()).skip(1).toList();
+
+    return values.map((value) => StudentItem.fromSheets(value)).toList();
+  }
+
+  static List<StudentItem> getStudents() {
+    return _students;
+  }
+
+  static Future<void> addStudent(StudentItem student) async {
+    final db = await getTable(1452015207);
+    final id = (await db.values.lastRow(fromColumn: 1))[0];
+    db.values.appendRow([
+      int.parse(id) + 1,
+      student.studentID,
+      student.inOutgoing,
+      student.language
+    ]);
+  }
+
+  static Future<bool> deleteStudent(int id) async {
+    final db = await getTable(1452015207);
+    return db.deleteRow(id + 1);
+  }
+
+  static void setStudentValue(int row, int col, String val) {
+    setValue(1452015207, row + 1, col, val);
+  }
 }
