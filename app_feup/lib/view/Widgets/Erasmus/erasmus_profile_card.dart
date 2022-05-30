@@ -17,6 +17,8 @@ class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
   int sID = 0;
   bool isInitialization = true;
 
+  bool isDbLoaded = true;
+
   String getStudentNumber() {
     return ErasmusDB.getStudentNumber().toString();
   }
@@ -30,6 +32,8 @@ class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
   void setValuesIfInDB() {
     isInitialization = false;
     List<StudentItem> students = ErasmusDB.getStudents();
+
+    if (students.isEmpty) isDbLoaded = false;
 
     students = students
         .where((elem) => (elem.studentID == getStudentNumber()))
@@ -48,6 +52,7 @@ class _ErasmusProfileCardState extends State<ErasmusProfileCard> {
   @override
   Widget build(BuildContext context) {
     if (isInitialization) setValuesIfInDB();
+    if (!isDbLoaded) return Text('Problem fetching data...');
     return Card(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         color: Color.fromARGB(0, 0, 0, 0),

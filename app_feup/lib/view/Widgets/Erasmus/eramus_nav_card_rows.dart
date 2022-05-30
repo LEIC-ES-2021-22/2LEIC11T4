@@ -14,6 +14,7 @@ class UniversityRows extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (items == null) return Text('\tProbleam fetching data...');
     return Container(
         child: Container(
       padding: EdgeInsets.only(left: 12.0, bottom: 8.0, right: 12),
