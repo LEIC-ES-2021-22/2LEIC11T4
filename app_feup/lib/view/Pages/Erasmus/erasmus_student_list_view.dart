@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:uni/model/erasmus/erasmus_db.dart';
+import 'package:uni/model/erasmus/studentItem.dart';
 import 'package:uni/view/Pages/general_page_view.dart';
 
 class ErasmusStudentListView extends StatefulWidget {
@@ -9,6 +11,8 @@ class ErasmusStudentListView extends StatefulWidget {
 
 /// Manages the 'about' section of the app.
 class ErasmusStudentListViewState extends GeneralPageViewState {
+  List<StudentItem> students = ErasmusDB.getStudents();
+
   @override
   Widget getBody(BuildContext context) {
     final MediaQueryData queryData = MediaQuery.of(context);
@@ -28,13 +32,10 @@ class ErasmusStudentListViewState extends GeneralPageViewState {
               right: queryData.size.width / 12,
               top: queryData.size.width / 12,
               bottom: queryData.size.width / 12),
-          child: Column(children: <Widget>[
-            Text(
-              'Student list \n\n',
-              textScaleFactor: 1.5,
-            ),
-            Text('TODO')
-          ]),
+          child: Column(
+              children: List.generate(students.length, (index) {
+            return (Text('${students[index].studentID}\n'));
+          })),
         ))
       ],
     );
