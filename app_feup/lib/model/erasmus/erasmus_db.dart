@@ -95,7 +95,9 @@ class ErasmusDB {
       uni.stars.expenses,
       uni.stars.experience,
       uni.stars.knowledge,
-      uni.imgUrl
+      uni.imgUrl,
+      uni.location.latitude,
+      uni.location.longitude
     ]);
   }
 
