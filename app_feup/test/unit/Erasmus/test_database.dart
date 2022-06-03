@@ -38,13 +38,11 @@ void main() {
       List<UniversityItem> universities = ErasmusDB.getUnis();
       bool found = false;
       universities.forEach((element) {
-        //print('${element.label}\t');
         if (element.label == university.label) {
           found = true;
         }
       });
 
-      //print('Value of ${found}\n');
       expect(found, true);
 
       await ErasmusDB.deleteUni(1000);
@@ -52,13 +50,11 @@ void main() {
 
       bool deleted = true;
       universities.forEach((element) {
-        //print('${element.label}\t');
         if (element.label == university.label) {
           deleted = false;
         }
       });
 
-      //print('Value of ${deleted}\n');
       expect(deleted, true);
     });
 
@@ -69,13 +65,12 @@ void main() {
       List<UniversityReview> reviews = await ErasmusDB.getReviews();
       bool found = false;
       reviews.forEach((element) {
-        //print('${element}\t');
         if (element.uniID == review.uniID && element.text == review.text && element.studentID == review.studentID) {
           found = true;
         }
       });
 
-      //print('Value of Found: ${found}\n');
+
       expect(found, true);
 
       await ErasmusDB.deleteReview(reviews.length + 2);
@@ -83,13 +78,11 @@ void main() {
 
       bool deleted = true;
       reviews.forEach((element) {
-        //print('${element}\t');
         if (element == review) {
           deleted = false;
         }
       });
 
-      //print('Value of Deleted ${deleted}\n');
       expect(deleted, true);
 
 
