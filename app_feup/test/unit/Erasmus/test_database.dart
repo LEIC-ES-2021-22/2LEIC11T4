@@ -5,12 +5,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uni/model/erasmus/erasmus_db.dart';
 import 'package:uni/model/erasmus/universityItem.dart';
+import 'package:uni/model/erasmus/universityReview.dart';
 import 'package:uni/view/Widgets/Erasmus/star_evaluation_view.dart';
 
 void main() {
   ErasmusDB.fetchData();
   group('Database Tests', () {
-    final university = UniversityItem(
+    final UniversityItem university = UniversityItem(
         label: 'TESTUNI',
         name: 'University of Testing',
         rank: '500',
@@ -23,8 +24,14 @@ void main() {
         stars: UniversityStarEvaluation(1, 1, 1, 1),
         location: LatLng(50.0123456, 19.7654321));
 
+    final UniversityReview review = UniversityReview(
+      uniID: '30',
+      studentID: '202004891',
+      text: 'TDD might be better than I thought',
+      stars: UniversityStarEvaluation(1, 1, 1, 1)
+    );
+
     test('Addinng and Removing a University', () async {
-      //print('Something hey!!!\n');
       await ErasmusDB.addUni(university);
       await ErasmusDB.fetchData();
 
@@ -37,23 +44,55 @@ void main() {
         }
       });
 
-      print('Value of ${found}\n');
+      //print('Value of ${found}\n');
       expect(found, true);
-      
+
       await ErasmusDB.deleteUni(1000);
       await ErasmusDB.fetchData();
 
-      bool deleted = false;
+      bool deleted = true;
       universities.forEach((element) {
         //print('${element.label}\t');
         if (element.label == university.label) {
-          deleted = true;
+          deleted = false;
         }
       });
 
-      print('Value of ${deleted}\n');
+      //print('Value of ${deleted}\n');
       expect(deleted, true);
-      
+    });
+
+    test('Addinng and Removing a Review', () async {
+      await ErasmusDB.addReview(review);
+      await ErasmusDB.fetchData();
+
+      List<UniversityReview> reviews = await ErasmusDB.getReviews();
+      bool found = false;
+      reviews.forEach((element) {
+        //print('${element}\t');
+        if (element.uniID == review.uniID && element.text == review.text && element.studentID == review.studentID) {
+          found = true;
+        }
+      });
+
+      //print('Value of Found: ${found}\n');
+      expect(found, true);
+
+      await ErasmusDB.deleteReview(reviews.length + 2);
+      await ErasmusDB.fetchData();
+
+      bool deleted = true;
+      reviews.forEach((element) {
+        //print('${element}\t');
+        if (element == review) {
+          deleted = false;
+        }
+      });
+
+      //print('Value of Deleted ${deleted}\n');
+      expect(deleted, true);
+
+
     });
   });
 }
