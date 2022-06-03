@@ -56,7 +56,9 @@ class ErasmusUniversityCard extends GenericCard {
   Widget buildCardContent(BuildContext context) {
     final MediaQueryData queryData = MediaQuery.of(context);
 
-    return Row(children: [
+    return Row(
+      key: Key('key_${uni.label}'),
+      children: [
       Container(
           width: queryData.size.height / 7,
           height: queryData.size.height / 7,
