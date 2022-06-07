@@ -45,8 +45,8 @@ class ErasmusDB {
     'Romenian',
     'Estonian',
     'Finish',
-    'Russian',
-    'Ukranian'
+    'Ukranian',
+    'All'
   ];
 
   static Future<Worksheet> getTable(int sID) async {
